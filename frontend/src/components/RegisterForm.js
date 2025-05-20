@@ -23,7 +23,6 @@ const pages = [
           //if new character is valid, append to form
           const input = e.target.value;
           if (input.length > 10) {
-            alert('your number can not exceed 10 digits!');
             return;
           }
           
@@ -32,7 +31,7 @@ const pages = [
           } 
           
           else {
-            alert('only numbers allowed!');
+            
           }
               }} /></label>
     </div>
@@ -49,7 +48,10 @@ const pages = [
 
 
 
-const RegisterForm = ({setIsRegistered, setUserInfo, setLoading}) => {
+
+const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, setModalText}) => {
+
+  
   const [page, setPage] = useState(0);
   const [formData, setFormData] = useState({ name: '', phone: '' });
   const navigate = useNavigate();
@@ -67,12 +69,13 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setLoading}) => {
     else if (formData.name === '' && formData.phone.length === 10) {
       alert('please enter a name')
     }
-
     else if (formData.name !== '' && formData.phone.length !== 10) {
       alert('please enter a phone #')
     }
     else {
-      setLoading(true);
+      //setTypeModal('loading');
+      setIsModal(true);
+      setModalText('Please wait while we register you to our platform')
       console.log(formData);
       const response = await fetch('http://localhost:5000/register', {
         method: 'POST',
@@ -81,7 +84,6 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setLoading}) => {
         },
         body: JSON.stringify(formData)
       })
-
       const data = await response.json();
       console.log('server response:', data);
       setUserInfo({
@@ -89,20 +91,10 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setLoading}) => {
         phone: data.User.phone
       })
       setIsRegistered(true)
-      setLoading(false)
+      setIsModal(false)
+      navigate('/search')
       }
-        navigate('/authenticate')
 
-
-        
-
-      
-
-
-    
-
-    //if form data empty, do nothing
-    
 
   }
 

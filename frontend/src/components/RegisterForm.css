@@ -59,6 +59,14 @@
     border-radius: .5rem;
 }
 
+.form-input:hover {
+    cursor: pointer;
+}
+
+.form-input:focus {
+    cursor: text;
+}
+
 .review > p:nth-child(2n+1) {
     color: blue;
 }

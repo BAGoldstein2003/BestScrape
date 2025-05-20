@@ -1,0 +1,10 @@
+.searchbar {
+    border-radius: 1rem;
+    height: 3rem;
+    width: 1000px;
+    text-align: center;
+}
+
+.searchbar::placeholder {
+    text-align: center;
+}

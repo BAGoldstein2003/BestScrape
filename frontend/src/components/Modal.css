@@ -1,0 +1,46 @@
+.loading-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+  
+}
+.info-area {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  width: 31.25rem;
+  height: 31.25rem;
+  background: linear-gradient(yellow, grey);
+  border-radius: 1rem;
+}
+
+.close-button {
+  position: absolute;
+  top: .7rem;
+  right: .7rem;
+  color: lightcoral;
+  transition: all 0.3s ease-out;
+}
+
+.close-button:hover {
+  scale: 1.3;
+  cursor: pointer;
+}
+
+.spinning-circles {
+  justify-self: center;
+}
+
+.error {
+  margin-bottom: 1rem;
+}

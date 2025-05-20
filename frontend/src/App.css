@@ -16,3 +16,7 @@
   border: 1px solid black;
   background: linear-gradient( yellow, grey)
 }
+
+.greeting {
+  text-align: center;
+}

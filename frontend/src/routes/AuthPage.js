@@ -2,7 +2,7 @@ import RegisterForm from '../components/RegisterForm.js'
 import './AuthPage.css'
 import {motion, AnimatePresence } from 'framer-motion'
 
-export default function AuthPage({isRegistered, setIsRegistered, userInfo, setUserInfo, setLoading}) {
+export default function AuthPage({isRegistered, setIsRegistered, userInfo, setUserInfo, setIsModal, setTypeModal, setModalText}) {
     return (
         <AnimatePresence mode="wait">
         {!isRegistered ? (
@@ -17,7 +17,9 @@ export default function AuthPage({isRegistered, setIsRegistered, userInfo, setUs
             <RegisterForm
                 setIsRegistered={setIsRegistered}
                 setUserInfo={setUserInfo}
-                setLoading={setLoading}
+                setIsModal={setIsModal}
+                setTypeModal={setTypeModal}
+                setModalText={setModalText}
             />
             </motion.div>
         ) : (
