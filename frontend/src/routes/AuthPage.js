@@ -1,0 +1,37 @@
+import RegisterForm from '../components/RegisterForm.js'
+import './AuthPage.css'
+import {motion, AnimatePresence } from 'framer-motion'
+
+export default function AuthPage({isRegistered, setIsRegistered, userInfo, setUserInfo, setLoading}) {
+    return (
+        <AnimatePresence mode="wait">
+        {!isRegistered ? (
+            <motion.div
+            key="register"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="register"
+            >
+            <RegisterForm
+                setIsRegistered={setIsRegistered}
+                setUserInfo={setUserInfo}
+                setLoading={setLoading}
+            />
+            </motion.div>
+        ) : (
+            <motion.h1
+            key="welcome"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="welcome-user"
+            >
+            Welcome, {userInfo.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}!
+            </motion.h1>
+        )}
+        </AnimatePresence>
+    )
+}
