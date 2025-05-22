@@ -3,8 +3,8 @@ import './SearchPage.css'
 import {motion} from 'framer-motion'
 import {useState} from 'react'
 
-export default function SearchPage({searchProducts}) {
-    
+export default function SearchPage({searchProducts, searchQuery, setSearchQuery}) {
+
     return (
         <>
             
@@ -27,7 +27,7 @@ export default function SearchPage({searchProducts}) {
                     originX: 0.5,
                     }}
                     >
-                        <ProductSearch className='searchbar' searchProducts={searchProducts}/>
+                        <ProductSearch className='searchbar' searchProducts={searchProducts} setSearchQuery={setSearchQuery} searchQuery={searchQuery}/>
                     </motion.div>
                 </div>
             

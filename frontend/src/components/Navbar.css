@@ -17,7 +17,6 @@
 .search {
   position: relative;
   right: 5rem;
-  text-decoration: none;
   transition: all 0.3s ease-out;
 }
 
@@ -35,5 +34,25 @@
 }
 
 .search:active {
+  color: grey;
+}
+
+.products {
+  position: absolute;
+  right: 25rem;
+  transition: all 0.3s ease-out;
+}
+
+.products-link {
+  text-decoration: none;
+  color: black;
+}
+
+.products:hover {
+  scale: 1.3;
+  cursor: pointer;
+}
+
+.products:active {
   color: grey;
 }

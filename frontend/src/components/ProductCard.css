@@ -1,0 +1,16 @@
+.product-card {
+    display: flex;
+    background: white;
+    align-items: center;
+    justify-content: space-around;
+    padding: .5rem;
+    border-radius: 1rem;
+    color: grey;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.title {
+    width: 20rem;
+    text-align: center;
+}

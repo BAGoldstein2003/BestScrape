@@ -1,8 +1,7 @@
 import './ProductSearch.css'
 import {useState} from 'react'
 
-export default function ProductSearch({searchProducts}) {
-    const [searchQuery, setSearchQuery] = useState('')
+export default function ProductSearch({searchProducts, searchQuery, setSearchQuery}) {
 
     const handleChange = (e) => {
         setSearchQuery(e.target.value)

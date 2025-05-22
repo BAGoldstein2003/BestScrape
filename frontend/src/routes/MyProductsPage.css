@@ -1,0 +1,36 @@
+.products-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-container {
+    margin: 4rem;
+    display: flex;
+    justify-content: center;
+}
+.search-bar {
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.search-bar::placeholder {
+    text-align: center;
+}
+
+.sort-options {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.product-card {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.product-card:nth-child(2n) {
+    background-color: blue;
+}
+
+.product-card:nth-child(2n+1) {
+    background-color: yellow;
+}

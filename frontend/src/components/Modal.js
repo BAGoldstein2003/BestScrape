@@ -11,6 +11,7 @@ export default function Modal({typeModal, modalText, setIsModal}) {
     const handleClose = () => {
         setIsModal(false)
     }
+
     if (typeModal === 'loading') {
         return (
             
