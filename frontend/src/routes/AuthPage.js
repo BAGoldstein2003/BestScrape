@@ -23,7 +23,7 @@ export default function AuthPage({isRegistered, setIsRegistered, userInfo, setUs
             />
             </motion.div>
         ) : (
-            <motion.h1
+            <motion.div
             key="welcome"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -31,9 +31,11 @@ export default function AuthPage({isRegistered, setIsRegistered, userInfo, setUs
             transition={{ duration: 0.3 }}
             className="welcome-user"
             >
-            Welcome, {userInfo.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}!
-            </motion.h1>
+                <h1>Welcome, {userInfo.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}!</h1>
+            
+            </motion.div>
         )}
         </AnimatePresence>
+    
     )
 }

@@ -24,22 +24,22 @@
     margin-bottom: 3rem;
 }
 .form-container {
-    margin-top: 3rem;
     padding: 3rem;
     justify-self: center;
     display: flex;
     flex-direction: column;
     width: 1300px;
-    border: .3rem solid blue;
+    /**border: .3rem solid blue;*/
     border-radius: 1rem;
     place-content: center;
     justify-content: center;
     transition: all 0.3s ease-out;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+
 }
 
 .form-container:hover {
-    background-color: yellow;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    
 }
 .field {
     font-family: 'best buy';
@@ -113,4 +113,12 @@
 
 .name-input {
     justify-content: center;
+}
+
+#yellow {
+    color: grey
+}
+
+#blue {
+    color: blue;
 }

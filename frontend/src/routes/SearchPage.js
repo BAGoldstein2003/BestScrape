@@ -1,7 +1,6 @@
 import ProductSearch from '../components/ProductSearch.js'
 import './SearchPage.css'
 import {motion} from 'framer-motion'
-import {useState} from 'react'
 
 export default function SearchPage({searchProducts, searchQuery, setSearchQuery}) {
 

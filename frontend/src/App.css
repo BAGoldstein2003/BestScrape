@@ -12,7 +12,6 @@
 
 .App {
   font-family: 'best buy';
-  border: 1px solid black;
   background: linear-gradient( yellow, grey)
 }
 

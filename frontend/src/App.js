@@ -1,7 +1,6 @@
 import './App.css';
-import RegisterForm from './components/RegisterForm.js'
-import { useState, useEffect } from 'react'
-import {BrowserRouter, Routes, Route, useNavigate, useLocation} from 'react-router'
+import {useState, useEffect} from 'react'
+import {Routes, Route, useLocation, useNavigate} from 'react-router'
 import AuthPage from './routes/AuthPage.js'
 import MyProductsPage from './routes/MyProductsPage.js'
 import SearchPage from './routes/SearchPage.js'
@@ -11,23 +10,26 @@ import {AnimatePresence} from 'framer-motion'
 
 
 function App() {
-  const [isRegistered, setIsRegistered] = useState(true);
-  const [scrapedProducts, setScrapedProducts] = useState([])
-  const [isModal, setIsModal] = useState(false)
-  const [typeModal, setTypeModal] = useState('loading')
-  const [modalText, setModalText] = useState('')
-  const [searchQuery, setSearchQuery] = useState('')
+
+  const [isRegistered, setIsRegistered] = useState(false);
+  const [scrapedProducts, setScrapedProducts] = useState([]);
+  const [isModal, setIsModal] = useState(false);
+  const [typeModal, setTypeModal] = useState('loading');
+  const [modalText, setModalText] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [userInfo, setUserInfo] = useState({
-    id: '',
     name: '',
-    phone: ''
+    email: ''
   });
 
-  const navigate = useNavigate();
   const location = useLocation();
-  const appHeight = location.pathname === '/my-products' ? '100%' : '100vh';
+  const navigate = useNavigate();
+  const appHeight = ((location.pathname === '/my-products') && (scrapedProducts.length > 8)) ? '100%' : '100vh';
 
   const getProductsFromDB = async () => {
+    if (scrapedProducts.length !== 0) {
+      return
+    }
     setTypeModal('loading')
     setModalText('Loading Product Data. Please be patient')
     setIsModal(true)
@@ -36,9 +38,12 @@ function App() {
     })
     const products = await response.json()
 
-    setScrapedProducts(products)
+    //save products in state
     console.log('products:', products)
-    setIsModal(false)
+    setTimeout(() => {
+      setIsModal(false)
+      setScrapedProducts(products)
+    }, 500)
   }
 
   const searchProducts = async () => {
@@ -50,28 +55,28 @@ function App() {
     })
     setIsModal(false);
     console.log(`products caught: ${queriedProducts}`)
-    const filtered = removeDuplicateSKUs(scrapedProducts, queriedProducts)
     setScrapedProducts(queriedProducts)
     console.log(scrapedProducts)
   }
 
-  const removeDuplicateSKUs = (existingItems, newItems) => {
-    const existingSKUs = new Set(existingItems.map(item => item.productSKU));
+  useEffect(() => {
+    if (location.pathname === '/') {
+      navigate('/authenticate')
+    }
+  }, )
 
-    return newItems.filter(item => !existingSKUs.has(item.productSKU));
-  }
 
   return (
     
     <div className="App" style={{ height: appHeight }}>
-      <Navbar isRegistered={isRegistered} setIsModal={setIsModal} setTypeModal={setTypeModal} setModalText={setModalText}/>
-      <AnimatePresence>
+      <Navbar isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} setTypeModal={setTypeModal} setModalText={setModalText}/>
+      <AnimatePresence mode="wait">
       {
         isModal && <Modal typeModal = {typeModal} setIsModal={setIsModal} modalText={modalText} className="loading"></Modal>
       }
       </AnimatePresence>
-      
-      <Routes>
+    <AnimatePresence>
+      <Routes location={location} key={location.pathname}>
         <Route 
           path='/authenticate' 
           element={<AuthPage 
@@ -91,11 +96,12 @@ function App() {
         <Route
           path='/search'
           element={<SearchPage 
-          searchProducts={searchProducts}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}/>}
+            searchProducts={searchProducts}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}/>}
         />
       </Routes>
+    </AnimatePresence>
     </div>
 
   );

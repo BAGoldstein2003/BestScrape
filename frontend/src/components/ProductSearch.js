@@ -1,5 +1,4 @@
 import './ProductSearch.css'
-import {useState} from 'react'
 
 export default function ProductSearch({searchProducts, searchQuery, setSearchQuery}) {
 

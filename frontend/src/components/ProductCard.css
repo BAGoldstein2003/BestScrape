@@ -1,5 +1,6 @@
 .product-card {
     display: flex;
+    flex-direction: column;
     background: white;
     align-items: center;
     justify-content: space-around;
@@ -8,9 +9,14 @@
     color: grey;
     gap: 1rem;
     margin: 1rem;
+    border: .3rem solid grey;
 }
 
 .title {
     width: 20rem;
     text-align: center;
+}
+
+.image {
+    border-radius: 1rem;
 }

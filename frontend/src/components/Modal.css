@@ -1,4 +1,4 @@
-.loading-background {
+.modal-background {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
   
 }
 .info-area {
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   display: flex;
   position: fixed;
@@ -43,4 +43,8 @@
 
 .error {
   margin-bottom: 1rem;
+}
+
+.desc {
+  text-align: center;
 }

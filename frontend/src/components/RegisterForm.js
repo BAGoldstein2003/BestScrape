@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router'
 import { motion, AnimatePresence } from 'framer-motion';
 import "./RegisterForm.css"
 
@@ -17,34 +16,25 @@ const pages = [
   ),
   ({ formData, setFormData }) => (
     <div className="field">
-      <label>Phone # (US ONLY): <input className="form-input" 
-        value={formData.phone} 
+      <label>Email: <input className="form-input" 
+        type="email"
+        value={formData.email} 
         onChange={(e) => {
           //if new character is valid, append to form
           const input = e.target.value;
-          if (input.length > 10) {
-            return;
-          }
-          
-          if (/^\d*$/.test(input)) {
-            setFormData({ ...formData, phone: input});
-          } 
-          
-          else {
-            
-          }
-              }} /></label>
+          setFormData({ ...formData, email: input});
+              }}
+      /></label>
     </div>
   ),
   ({ formData }) => (
     <div className="review">
       <p>Review:</p>
-      <p>Name: {formData.name}</p>
-      <p>Phone #: {formData.phone}</p>
+      <p>Name: {formData.name ? formData.name : "*EMPTY*"}</p>
+      <p>Email: {formData.email ? formData.email : "*EMPTY*"}</p>
     </div>
   )
 ];
-
 
 
 
@@ -53,28 +43,65 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
 
   
   const [page, setPage] = useState(0);
-  const [formData, setFormData] = useState({ name: '', phone: '' });
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [slideDirection, setSlideDirection] = useState(1);
 
+ const variants = {
+    enter: (direction) => ({
 
-  const nextPage = () => setPage((prev) => Math.min(prev + 1, pages.length - 1));
-  const prevPage = () => setPage((prev) => Math.max(prev - 1, 0));
+      x: direction > 0 ? 300 : -300,
+      opacity: 0,
+      position: 'relative'
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      position: 'relative'
+    },
+    exit: (direction) => ({
+      x: direction > 0 ? -300 : 300,
+      opacity: 0,
+      position: 'relative'
+    })
+  };
 
+  const nextPage = () => {
+    setSlideDirection(1); 
+    setPage((prev) => Math.min(prev + 1, pages.length - 1));
+  }
+
+  const prevPage = () => {
+    setSlideDirection(-1);
+    setPage((prev) => Math.max(prev - 1, 0));
+  }
 
   const handleSubmit = async () => {
-
-    if (formData.name === '' && formData.phone.length !== 10) {
-      alert('please enter your name and phone number')
+    //IF name ERROR and email ERROR
+    if (formData.name === '' &&  
+      (formData.email.length === 0 || 
+      !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)))) {
+        setIsModal(true);
+        setTypeModal('error')
+        setModalText('Please enter your name and a valid email address')
     }
-    else if (formData.name === '' && formData.phone.length === 10) {
-      alert('please enter a name')
+    //IF name ERROR and email VALID
+    else if (formData.name === '' && 
+      (formData.email.length !== 0 && 
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))) {
+        setIsModal(true);
+        setTypeModal('error')
+        setModalText('Please enter a valid name')
     }
-    else if (formData.name !== '' && formData.phone.length !== 10) {
-      alert('please enter a phone #')
+    //IF name VALID and email ERROR
+    else if (formData.name !== '' && (formData.email.length === 0 ||
+      !(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)))) {
+        setIsModal(true);
+        setTypeModal('error');
+        setModalText('Please enter a valid email address');
     }
     else {
-      //setTypeModal('loading');
       setIsModal(true);
+      setTypeModal('loading')
       setModalText('Please wait while we register you to our platform')
       console.log(formData);
       const response = await fetch('http://localhost:5000/register', {
@@ -83,32 +110,74 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData)
-      })
+      });
       const data = await response.json();
+
+      if (data.error) {
+        console.error('server error:', data)
+        setTypeModal('error');
+        setModalText('Uh Oh! A user with the same email has already been found in our database! Please try again with a different email, or log in with the same name');
+        return;
+      }
+
+      else if (data.login) {
       console.log('server response:', data);
       setUserInfo({
         name: data.User.name,
-        phone: data.User.phone
+        email: data.User.email
       })
-      setIsRegistered(true)
-      setIsModal(false)
-      navigate('/search')
+      setIsRegistered(true);
+      setIsModal(false);
+      setTimeout(() => {
+        setTypeModal('success');
+        setModalText('Successfully Logged In!');
+        localStorage.setItem('userData', {'name': data.User.name, 'email': data.User.email})
+      })
+      
       }
+
+      else if (data.register) {
+        console.log('server response: ', data)
+        setUserInfo({
+          name: data.User.name,
+          email: data.User.email
+        })
+        setIsRegistered(true);
+        setIsModal(false)
+        setTimeout(() => {
+          setIsModal(true)
+          setTypeModal('success')
+          setModalText('Successfully Registered!')
+          localStorage.setItem('userData', {'name': data.User.name, 'email': data.User.email})
+        }, 500)
+        
+      }
+    }
+
 
 
   }
 
   return (
     <div className="form-container" >
-      <img className="image" src="/BEST_SCRAPE-removebg-preview.png"></img>
-      <h1 className='welcome'>Welcome to BestScrape™!</h1>
-      <h4 className="info">Fill out the following form to receive updates on prices:</h4>
-      <AnimatePresence mode="wait">
+      <img className="image" src="/BEST_SCRAPE-removebg-preview.png" alt='logo'></img>
+      <motion.div
+          initial={{ x: -200, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -200, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+      <h1 className='welcome'>Welcome to <span id="yellow">Best</span><span id="blue">Scrape</span>™!</h1>
+      </motion.div>
+      <h4 className="info">Sign-Up/Log-In to Receive Updates on Prices:</h4>
+      <AnimatePresence  mode="wait" custom={slideDirection}>
         <motion.div
           key={page}
-          initial={{ x: 300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -300, opacity: 0 }}
+          custom={slideDirection}
+          variants={variants}
+          initial="enter"
+          animate="center"
+          exit="exit"
           transition={{ duration: 0.3 }}
         >
           {React.createElement(pages[page], { formData, setFormData })}
@@ -122,6 +191,7 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
           <button className="page-button" style={{ float: 'right' }} onClick={handleSubmit}>Submit</button>
         )}
       </div>
+
     </div>
   );
 };

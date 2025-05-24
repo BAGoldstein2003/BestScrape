@@ -1,5 +1,5 @@
 .navbar {
-  display: flex;
+  position:fixed;
   height: 90px;
   background-color: blue;
 }
@@ -14,14 +14,43 @@
   scale: 1.3;
 }
 
+.logo-options {
+  display: flex;
+  opacity: 0;                   
+  pointer-events: none;
+  position: absolute;
+  left: 1rem;
+  transition: all 0.15s ease-out;
+}
+
+.logo-options.active {
+  opacity: 1;
+  pointer-events:all;
+  transform: translateY(4rem)
+}
+
+.auth-button.log-out{
+  border: none;
+  border-radius: .5rem;
+  background-color: rgb(230, 92, 92);
+  box-shadow: 0 1px 5px rgb(0, 0, 0, 0.5);
+}
+
+.auth-button.log-in{
+  border: none;
+  border-radius: .5rem;
+  background-color: yellow;
+  box-shadow: 0 1px 5px rgb(0, 0, 0, 0.5);
+}
 .search {
+  display: flex;
+  justify-content: center;
+  align-items: end;
   position: relative;
   right: 5rem;
   transition: all 0.3s ease-out;
-}
-
-.search:hover {
-  cursor: pointer;
+  border-radius: 3rem;
+  padding: .3rem;
 }
 
 .search-link {
@@ -30,7 +59,9 @@
 }
 
 .search:hover {
+  cursor: pointer;
   scale: 1.3;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
 }
 
 .search:active {
@@ -38,9 +69,14 @@
 }
 
 .products {
+  display: flex;
+  justify-content: center;
+  align-items: end;
   position: absolute;
   right: 25rem;
   transition: all 0.3s ease-out;
+  border-radius: 3rem;
+  padding: .3rem;
 }
 
 .products-link {
@@ -51,6 +87,7 @@
 .products:hover {
   scale: 1.3;
   cursor: pointer;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 1);
 }
 
 .products:active {

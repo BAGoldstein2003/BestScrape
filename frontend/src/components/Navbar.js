@@ -1,57 +1,62 @@
 import './Navbar.css'
-import { motion } from 'framer-motion'
+import {useState} from 'react'
 import {useNavigate} from 'react-router'
 import { FcSearch } from "react-icons/fc";
 import { CiCircleList } from "react-icons/ci";
 
-export default function Navbar({setIsModal, isRegistered, setTypeModal, setModalText}) {
-  const navigate = useNavigate()
+export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTypeModal, setModalText}) {
+  const [isLogoActive, setIsLogoActive] = useState(false);
+  const navigate = useNavigate();
+
+  const handleClick = (path) => {
+
+    if (!isRegistered) {
+      if (path === '/my-products') {
+        setIsModal(true)
+        setTypeModal('error')
+        setModalText('You must be logged in to view the products page!')
+        navigate('/authenticate')
+        return
+      }
+      if (path === '/search') {
+        setIsModal(true)
+        setTypeModal('error')
+        setModalText('You must be logged in to search for products!')
+        return
+      }
+    }
+      navigate(path)
+  }
 
   const handleLogoClick = () => {
-    if (isRegistered) {
-      navigate('/my-products')
-    }
-    else {
-      setModalText('You must be logged in to visit this page!')
-      setTypeModal('error')
-      setIsModal(true)
-    }
+    setIsLogoActive(prev => !prev)
   }
 
-  const handleSearchClick = () => {
+  const changeAuthState = () => {
     if (isRegistered) {
-      navigate('/search')
+      setIsRegistered(false)
     }
-    else {
-      setModalText('You must be logged in to search for products!')
-      setTypeModal('error')
-      setIsModal(true)
-    }
+    navigate('/authenticate')
+    document.querySelector('auth-button')
+    setIsLogoActive(false)
   }
-
-  const handleProductsClick = () => {
-    if (isRegistered) {
-      navigate('/my-products')
-    }
-    else {
-      setModalText('You must be logged in to view products!')
-      setTypeModal('error')
-      setIsModal(true)
-    }
-  }
+  
+  
 
     return (
-      
         <div className="navbar">
           
-          <a onClick={handleLogoClick}><img className="logo" alt="logo" src="BEST_SCRAPE-removebg-preview.png"></img></a>
-          <div className="products" onClick={handleProductsClick}>
-            <CiCircleList size="50" fill="grey"/>
-            <a className="products-link">View Products</a>
+          <img onClick={() => handleLogoClick()} className="logo" alt="logo" src="BEST_SCRAPE-removebg-preview.png"></img>
+          <div className={`logo-options ${isLogoActive ? 'active' : ''}`}>
+            <button className={`auth-button ${isRegistered ? 'log-out' : 'log-in'}`} onClick={changeAuthState}>{isRegistered ? 'Log Out' : 'Log In'}</button>
           </div>
-          <div className="search" onClick={handleSearchClick}>
+          <div className="products" onClick={() => handleClick('/my-products')}>
+            <CiCircleList size="50" fill="grey"/>
+            <p className="products-link">View Products</p>
+          </div>
+          <div className="search" onClick={() => handleClick('/search')}>
             <FcSearch size="50" />
-            <a className="search-link">Search For Products</a>
+            <p className="search-link">Search For Products</p>
           </div>
           
           

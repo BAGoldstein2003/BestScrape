@@ -8,6 +8,9 @@ Follow the instructions below on how to run this project.
 2. navigate to the frontend directory using the following command:
 ```cd frontend```
 
+3. run the following command to install the project dependencies:
+```npm install```
+
 3. Finally, run the following command:
 ```npm start```
 
