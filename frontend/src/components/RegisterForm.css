@@ -29,26 +29,27 @@
     display: flex;
     flex-direction: column;
     width: 1300px;
-    /**border: .3rem solid blue;*/
     border-radius: 1rem;
     place-content: center;
     justify-content: center;
     transition: all 0.3s ease-out;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-
 }
 
-.form-container:hover {
-    
-}
-.field {
+.page.field {
     font-family: 'best buy';
     justify-self: center;
+    transition: all 0.3s ease-out;
 }
 
-.review {
+.page.review {
+    padding: 2rem;
     font-family: 'best buy';
     justify-self: center;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    border-radius: 1rem;
+    text-align: center;
+    transition: all 0.3s ease-out;
 }
 
 .form-input {
@@ -67,11 +68,11 @@
     cursor: text;
 }
 
-.review > p:nth-child(2n+1) {
+.page.review > p:nth-child(2n+1) {
     color: blue;
 }
 
-.review > p:nth-child(2n) {
+.page.review > p:nth-child(2n) {
     color: grey;
 }
 
@@ -121,4 +122,8 @@
 
 #blue {
     color: blue;
+}
+
+.review-header {
+    text-align: center;
 }

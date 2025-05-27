@@ -1,9 +1,9 @@
 .register {
-    padding-top: 13rem;
     display: flex;
     flex-direction: column;
     justify-content: center;   /* horizontal center */
     align-items: center;
+    height: 100%;
 }
 
 .more-info {

@@ -3,6 +3,14 @@
   src: url('../public/Futura Extra Bold.otf')
 }
 
+@keyframes rotateGradient {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 .welcome-user {
   margin: 3rem;
@@ -10,11 +18,31 @@
   justify-self: center;
 }
 
+html, body {
+  background: linear-gradient(yellow, grey);
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .App {
   font-family: 'best buy';
-  background: linear-gradient( yellow, grey)
+  height: 100%;
+  position: relative;
+  min-height: 100vh;
 }
 
 .greeting {
   text-align: center;
+}
+
+.subscribe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  text-align: center;
+  bottom: 2rem;
+  left: 50%;
 }

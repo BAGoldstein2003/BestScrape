@@ -1,11 +1,15 @@
 import ProductCard from '../components/ProductCard.js'
 import {useState, useEffect} from 'react'
+import {AnimatePresence} from 'framer-motion'
 import './MyProductsPage.css'
+import PriceHistory from '../components/PriceHistory.js'
 
 export default function MyProductsPage({products, getProducts}) {
     const [searchQuery, setSearchQuery] = useState('')
     const [sortType, setSortType] = useState('name');
-    
+    const [priceHistoryProduct, setPriceHistoryProduct] = useState(null);
+
+    //handles 
     const handleSearch = (e) => {
         setSearchQuery(e.target.value.toLowerCase())
     }
@@ -15,10 +19,8 @@ export default function MyProductsPage({products, getProducts}) {
     }
 
     useEffect(() => {
-        console.log(`products amount: ${products.length}`)
         getProducts()
-        console.log(`products: ${products}`)
-    }, [getProducts, products])
+    }, [getProducts])
 
     const filteredProducts = products.filter(product =>
         product.title.toLowerCase().includes(searchQuery)
@@ -31,75 +33,42 @@ export default function MyProductsPage({products, getProducts}) {
             return a.price - b.price
         }
     });
-    
-    if (sortType === 'name') {
-        return (
-            <>  
-                <div className="search-container">
-                    <input className="search-bar"
-                        onChange={handleSearch} 
-                        type="search"
-                        placeholder="Search products...">
-                    </input>
-                </div>
-                <div className="sort-options">
-                    <label>Sort By Name </label>
-                    <input type="radio" name="sort" value="name"></input>
 
-                    <label>Sort By Price</label>
-                    <input type="radio" name="sort" value="price"></input>
-                </div>
-                <div className="products-page">
-                    
-                {
-                    filteredProducts.sort().map((product, idx) => (
-                        <ProductCard key={idx} product={product} />
-                    ))
-                }
-                </div>
-            </>
-        )
-    }
+    return (
+        <>  
+            <div className="search-container">
+                <input className="search-bar"
+                    onChange={handleSearch} 
+                    type="search"
+                    placeholder="Search products...">
+                </input>
+            </div>
+            <div className="sort-options">
+                <label>Sort By Name </label>
+                <input type="radio" name="sort" value="name" checked={sortType === 'name'} onChange={handleSortChange} />
 
-    else {
-        return (
-            <>  
-                <div className="search-container">
-                    <input className="search-bar"
-                        onChange={handleSearch} 
-                        type="search"
-                        placeholder="Search products...">
-                    </input>
-                </div>
-                <div className="sort-options">
-                    <label>Sort By Name </label>
-                    <input 
-                        type="radio"
-                        for="name"
-                        name="sort"
-                        value="name"
-                        checked={sortType === 'name'}
-                        onChange={handleSortChange}
-                        />
-
-                    <label>Sort By Price</label>
-                    <input type="radio"
-                        for="price"
-                        name="sort"
-                        value="price"
-                        checked={sortType === 'price'}
-                        onChange={handleSortChange}
-                        />
-                </div>
-                <div className="products-page">
-                    
+                <label>Sort By Price</label>
+                <input type="radio" name="sort" value="price" checked={sortType === 'price'} onChange={handleSortChange} />
+            </div>
+            <div className="products-page">
                 {
                     filteredProducts.map((product, idx) => (
-                        <ProductCard className='product-card' key={idx} product={product} />
+                        <ProductCard
+                            key={product.SKU || idx}
+                            product={product}
+                            onShowPriceHistory={() => setPriceHistoryProduct(product)}
+                        />
                     ))
                 }
-                </div>
-            </>
-        )
-    }
+            </div>
+            <AnimatePresence mode='wait'>
+                {priceHistoryProduct && (
+                    <PriceHistory
+                        priceHistory={priceHistoryProduct.price_history}
+                        setIsPriceHistory={() => setPriceHistoryProduct(null)}
+                    />
+                )}
+            </AnimatePresence>
+        </>
+    )
 }

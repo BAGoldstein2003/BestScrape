@@ -1,5 +1,6 @@
 .navbar {
-  position:fixed;
+  position: absolute;
+  top: 0px;
   height: 90px;
   background-color: blue;
 }
@@ -32,8 +33,19 @@
 .auth-button.log-out{
   border: none;
   border-radius: .5rem;
-  background-color: rgb(230, 92, 92);
+  color: rgb(230, 92, 92);
+  background-color: blue;
+  
   box-shadow: 0 1px 5px rgb(0, 0, 0, 0.5);
+}
+
+.auth-button {
+  transition: all 0.2s ease-out;
+}
+
+.auth-button.log-out:hover {
+  background-color: rgb(230, 92, 92);
+  color: blue;
 }
 
 .auth-button.log-in{
@@ -48,7 +60,7 @@
   align-items: end;
   position: relative;
   right: 5rem;
-  transition: all 0.3s ease-out;
+  transition: all 0.1s ease-out;
   border-radius: 3rem;
   padding: .3rem;
 }
@@ -74,7 +86,7 @@
   align-items: end;
   position: absolute;
   right: 25rem;
-  transition: all 0.3s ease-out;
+  transition: all 0.1s ease-out;
   border-radius: 3rem;
   padding: .3rem;
 }

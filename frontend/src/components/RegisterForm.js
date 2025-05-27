@@ -4,7 +4,7 @@ import "./RegisterForm.css"
 
 const pages = [
   ({ formData, setFormData }) => (
-    <div className="field">
+    <div className="page field">
       <label>Name: <input className="form-input" value={formData.name} onChange={(e) => {
         const input = e.target.value
         if (input.length > 30) {
@@ -15,7 +15,7 @@ const pages = [
     </div>
   ),
   ({ formData, setFormData }) => (
-    <div className="field">
+    <div className="page field">
       <label>Email: <input className="form-input" 
         type="email"
         value={formData.email} 
@@ -28,8 +28,8 @@ const pages = [
     </div>
   ),
   ({ formData }) => (
-    <div className="review">
-      <p>Review:</p>
+    <div className="page review">
+      <p className="review-header">Review:</p>
       <p>Name: {formData.name ? formData.name : "*EMPTY*"}</p>
       <p>Email: {formData.email ? formData.email : "*EMPTY*"}</p>
     </div>
@@ -121,26 +121,26 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
       }
 
       else if (data.login) {
-      console.log('server response:', data);
-      setUserInfo({
-        name: data.User.name,
-        email: data.User.email
-      })
-      setIsRegistered(true);
-      setIsModal(false);
-      setTimeout(() => {
+        console.log('server response:', data);
+        setUserInfo({
+          name: data.User.name,
+          email: data.User.email,
+          id: data.User.userid
+        })
+        setIsRegistered(true);
+        setIsModal(false);
+        setIsModal(true)
         setTypeModal('success');
         setModalText('Successfully Logged In!');
         localStorage.setItem('userData', {'name': data.User.name, 'email': data.User.email})
-      })
-      
       }
 
       else if (data.register) {
         console.log('server response: ', data)
         setUserInfo({
           name: data.User.name,
-          email: data.User.email
+          email: data.User.email,
+          id: data.User.userid
         })
         setIsRegistered(true);
         setIsModal(false)
@@ -165,7 +165,7 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
           initial={{ x: -200, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: -200, opacity: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
         >
       <h1 className='welcome'>Welcome to <span id="yellow">Best</span><span id="blue">Scrape</span>™!</h1>
       </motion.div>

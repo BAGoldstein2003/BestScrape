@@ -1,0 +1,24 @@
+
+.button:hover {
+    color:darkgray;
+    transition: all 0.1s ease-out;
+    cursor: pointer;
+}
+
+button {
+    color: darkblue;
+}
+
+.subscribe {
+    display: flex;
+    border-radius: 2rem;
+    background-color: darkgrey;
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.subscribe:hover {
+    background-color: blue;
+}

@@ -1,4 +1,5 @@
 .product-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     background: white;
@@ -13,10 +14,34 @@
 }
 
 .title {
+    justify-self: center;
     width: 20rem;
     text-align: center;
+    margin: 0;
 }
 
 .image {
     border-radius: 1rem;
+}
+
+.price-history {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: lightblue;
+    text-decoration: none;
+    border-radius: 1rem;
+    background-color: grey;
+    padding: .3rem;
+    transition: all 0.3s ease-out;
+    margin-top: 1rem;
+    margin-right: 1.2rem;
+}
+
+.price-history:hover {
+    scale: 1.2;
+}
+
+.price-history:active {
+    background-color: white;
 }

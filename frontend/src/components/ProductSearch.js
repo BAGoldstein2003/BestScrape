@@ -15,6 +15,7 @@ export default function ProductSearch({searchProducts, searchQuery, setSearchQue
     return (
         <>
             <input className="searchbar" type="search" value={searchQuery} onChange={handleChange} onKeyDown = {handleSubmit} placeholder="Ex. Headphones, Laptops"></input>
+            <button className="fixed-button"></button>
         </>
     )
 }
