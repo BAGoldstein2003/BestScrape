@@ -13,6 +13,14 @@
     border: .3rem solid grey;
 }
 
+.product-card.decrease {
+    border: .3rem solid lightgreen;
+}
+
+.product-card.increase {
+    border: .3rem solid red;
+}
+
 .title {
     justify-self: center;
     width: 20rem;
@@ -25,17 +33,12 @@
 }
 
 .price-history {
-    position: absolute;
-    top: 0px;
-    right: 0px;
     color: lightblue;
     text-decoration: none;
     border-radius: 1rem;
     background-color: grey;
     padding: .3rem;
     transition: all 0.3s ease-out;
-    margin-top: 1rem;
-    margin-right: 1.2rem;
 }
 
 .price-history:hover {

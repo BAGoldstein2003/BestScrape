@@ -1,5 +1,5 @@
 import './App.css';
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useCallback} from 'react'
 import {Routes, Route, useLocation, useNavigate} from 'react-router'
 import AuthPage from './routes/AuthPage.js'
 import MyProductsPage from './routes/MyProductsPage.js'
@@ -12,7 +12,6 @@ import {AnimatePresence} from 'framer-motion'
 
 
 function App() {
-
   const [isRegistered, setIsRegistered] = useState(false);
   const [scrapedProducts, setScrapedProducts] = useState([]);
   const [isModal, setIsModal] = useState(false);
@@ -24,24 +23,25 @@ function App() {
     email: null,
     id: null
   });
-
   const location = useLocation();
   const navigate = useNavigate();
   const appHeight = ((location.pathname === '/my-products') && (scrapedProducts.length > 8)) ? '100%' : '100vh';
 
-  const getProductsFromDB = async () => {
+
+  const getProducts = useCallback(async () => {
     if (scrapedProducts.length !== 0) {
       return
     }
     setTypeModal('loading')
     setModalText('Loading Product Data. Please be patient')
     setIsModal(true)
+    
     try {
       const response = await fetch('http://localhost:5000/products', {
         method: 'GET'
       })
       const products = await response.json()
-      console.log('products:', {products})
+      console.log('products:', {scrapedProducts})
       setTimeout(() => {
         setIsModal(false)
         setScrapedProducts(products)
@@ -49,28 +49,50 @@ function App() {
     }
     catch {
       setTypeModal('error')
+      setModalText('Error trying to fetch products. Please try restarting your connection')
+      getDummyData()
     }
-
     //save products in state
+  }, [setTypeModal, setModalText, setScrapedProducts])
+
+
+  const getDummyData = async () => {
+    try {
+      const response = await fetch('dummyData.json')
+      const data = await response.json()
+      console.log('dummy data:', data)
+      setScrapedProducts(data)
+    }
+    catch {
+      console.error('error fetching dummy data')
+    }
     
+    return
   }
 
   const subscribe = async () => {
     setIsModal(true)
     setModalText('Please Wait while we subscribe you to our newsletter.')
     setTypeModal('loading')
-    const response = await fetch(`http://localhost:5000/subscribe?userid=${userInfo.id}&useremail=${userInfo.email}`)
-    const data = await response.json();
-    console.log('server response:', data)
-    if (data.error) {
-      setIsModal(true)
-      setModalText('email could not send, please check your connection')
-      setTypeModal('error')
+
+    try {
+      const response = await fetch(`http://localhost:5000/subscribe?userid=${userInfo.id}&useremail=${userInfo.email}`)
+      const data = await response.json();
+      console.log('server response:', data)
+      if (data.error) {
+        setIsModal(true)
+        setModalText('email could not send, please check your connection')
+        setTypeModal('error')
+      }
+      else {
+        setIsModal(true)
+        setModalText('subscription email successfully sent!')
+        setTypeModal('success')
+      }
     }
-    else {
-      setIsModal(true)
-      setModalText('subscription email successfully sent!')
-      setTypeModal('success')
+    catch {
+      setTypeModal('error')
+      setModalText('error trying to subscribe your account. Please check your internet connection.')
     }
   }
 
@@ -98,13 +120,10 @@ function App() {
     
     <div className="App" style={{ height: appHeight }}>
       <div className="gradient-bg"></div>
-      <Navbar isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} setTypeModal={setTypeModal} setModalText={setModalText}/>
+      <Navbar isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} setTypeModal={setTypeModal} setModalText={setModalText} subscribe={subscribe}/>
       <AnimatePresence>
         {
           isModal && <Modal key="modal" className="loading" typeModal={typeModal} setIsModal={setIsModal} modalText={modalText} isModal={isModal}></Modal>
-        }
-        {
-          isRegistered && <Subscribe subscribe={subscribe}></Subscribe>
         }
       <Routes location={location} key={location.pathname}>
         <Route 
@@ -121,7 +140,7 @@ function App() {
         />
         <Route
           path='/my-products'
-          element={<MyProductsPage products={scrapedProducts} getProducts={getProductsFromDB}/>}
+          element={<MyProductsPage products={scrapedProducts} getProducts={getProducts}/>}
         />
         <Route
           path='/search'

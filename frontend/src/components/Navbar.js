@@ -3,6 +3,7 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router'
 import { FcSearch } from "react-icons/fc";
 import { CiCircleList } from "react-icons/ci";
+import Subscribe from './Subscribe.js'
 
 export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTypeModal, setModalText}) {
   const [isLogoActive, setIsLogoActive] = useState(false);

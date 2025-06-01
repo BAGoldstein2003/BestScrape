@@ -1,6 +1,32 @@
 .products-page {
+    display: flex;
+    
+
+}
+
+.products-list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+}
+
+.products-col {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4rem;
+}
+
+.favorites-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    right: 0;
+}
+
+.favorites-title {
+    margin: 4rem;
 }
 
 .search-container {
@@ -20,7 +46,7 @@
 .sort-options {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 .product-card {

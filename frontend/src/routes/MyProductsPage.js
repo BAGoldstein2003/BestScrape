@@ -8,6 +8,7 @@ export default function MyProductsPage({products, getProducts}) {
     const [searchQuery, setSearchQuery] = useState('')
     const [sortType, setSortType] = useState('name');
     const [priceHistoryProduct, setPriceHistoryProduct] = useState(null);
+    const [favorites, setFavorites] = useState([])
 
     //handles 
     const handleSearch = (e) => {
@@ -20,7 +21,8 @@ export default function MyProductsPage({products, getProducts}) {
 
     useEffect(() => {
         getProducts()
-    }, [getProducts])
+        // eslint-disable-next-line
+    }, [])
 
     const filteredProducts = products.filter(product =>
         product.title.toLowerCase().includes(searchQuery)
@@ -35,31 +37,37 @@ export default function MyProductsPage({products, getProducts}) {
     });
 
     return (
-        <>  
-            <div className="search-container">
-                <input className="search-bar"
-                    onChange={handleSearch} 
-                    type="search"
-                    placeholder="Search products...">
-                </input>
-            </div>
-            <div className="sort-options">
-                <label>Sort By Name </label>
-                <input type="radio" name="sort" value="name" checked={sortType === 'name'} onChange={handleSortChange} />
+        <>  <div className="products-page">
+                <div className="products-col">
+                    <div className="search-container">
+                        <input className="search-bar"
+                            onChange={handleSearch} 
+                            type="search"
+                            placeholder="Search products...">
+                        </input>
+                    </div>
+                    <div className="sort-options">
+                        <label>Sort By Name </label>
+                        <input type="radio" name="sort" value="name" checked={sortType === 'name'} onChange={handleSortChange} />
 
-                <label>Sort By Price</label>
-                <input type="radio" name="sort" value="price" checked={sortType === 'price'} onChange={handleSortChange} />
-            </div>
-            <div className="products-page">
-                {
-                    filteredProducts.map((product, idx) => (
-                        <ProductCard
-                            key={product.SKU || idx}
-                            product={product}
-                            onShowPriceHistory={() => setPriceHistoryProduct(product)}
-                        />
-                    ))
-                }
+                        <label>Sort By Price</label>
+                        <input type="radio" name="sort" value="price" checked={sortType === 'price'} onChange={handleSortChange} />
+                    </div>
+                    <div className="products-list">
+                        {
+                            filteredProducts.map((product, idx) => (
+                                <ProductCard
+                                    key={product.SKU || idx}
+                                    product={product}
+                                    onShowPriceHistory={() => setPriceHistoryProduct(product)}
+                                />
+                            ))
+                        }
+                    </div>
+                </div>
+                <div className="favorites-col">
+                    <h1 className="favorites-title">Your Tracked Products:</h1>
+                </div>
             </div>
             <AnimatePresence mode='wait'>
                 {priceHistoryProduct && (

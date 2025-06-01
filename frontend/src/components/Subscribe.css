@@ -14,9 +14,10 @@ button {
     border-radius: 2rem;
     background-color: darkgrey;
     position: absolute;
-    bottom: 2rem;
+    bottom: -10rem;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin-bottom: 2rem;
 }
 
 .subscribe:hover {

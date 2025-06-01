@@ -15,10 +15,14 @@
 }
 
 .history-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   width: 800px;
   background-color: yellow;
   border-radius: 1rem;
+  gap: 5rem;
 }
 
 .history-closebtn {
@@ -35,5 +39,6 @@
 }
 .title {
     text-align: center;
+    margin-top: 1rem;
 }
 

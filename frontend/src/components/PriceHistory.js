@@ -22,7 +22,7 @@ export default function PriceHistory({priceHistory, setIsPriceHistory}) {
         const dates = [];
         const prices = [];
         if (Array.isArray(priceHistory)) {
-            priceHistory.forEach(item => {
+            priceHistory.slice().reverse().forEach(item => {
                 // Expecting format: "date=price"
                 const [date, price] = item.split('=');
                 dates.push(date);
@@ -56,7 +56,7 @@ export default function PriceHistory({priceHistory, setIsPriceHistory}) {
                         y: { 
                             title: { display: true, text: 'Price ($)' },
                             ticks: {
-                                callback: function(value) {
+                                callback: (value) => {
                                     return value.toFixed(2)
                                 }
                              }}

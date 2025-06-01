@@ -3,11 +3,13 @@ import './PriceTrend.css'
 export default function PriceTrend({priceHistory}) {
     
     const newPrice = Number(priceHistory[0].split('=')[1]).toFixed(2)
+
+    //If price has been scraped multiple times:
     if (priceHistory.length > 1) {
         const oldPrice = Number(priceHistory[1].split('=')[1]).toFixed(2)
 
 
-
+        //if price has increased:
         if (newPrice > oldPrice) {
             return (
                 <>
@@ -20,6 +22,7 @@ export default function PriceTrend({priceHistory}) {
                 </>
             )
         }
+        //if price has decreased:
         else if (newPrice < oldPrice) {
             return (
                 <>  
