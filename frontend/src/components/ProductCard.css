@@ -14,7 +14,7 @@
 }
 
 .product-card.decrease {
-    border: .3rem solid lightgreen;
+    border: .3rem solid green;
 }
 
 .product-card.increase {
@@ -47,4 +47,21 @@
 
 .price-history:active {
     background-color: white;
+}
+
+.product-card {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    transition: all 0.1s ease-out;
+}
+
+.product-card:hover {
+    scale: 1.05
+}
+
+.product-card:nth-child(2n) {
+    background-color: blue;
+}
+
+.product-card:nth-child(2n+1) {
+    background-color: yellow;
 }

@@ -1,0 +1,31 @@
+.favorite-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: pink;
+    align-items: center;
+    justify-content: space-around;
+    padding: .5rem;
+    border-radius: 1rem;
+    color: grey;
+    gap: 1rem;
+    margin: 1rem;
+    border: .3rem solid rgba(255,0,0,0.3);
+}
+
+
+
+.delete-btn {
+    position:absolute;
+    top: 1rem;
+    right: 1rem;
+    border-radius: 1rem;
+    color: pink;
+    background-color: rgba(255, 0, 0, 1);
+    transition: all 0.1s ease-out;
+}
+
+.delete-btn:hover {
+    scale: 1.1
+
+}

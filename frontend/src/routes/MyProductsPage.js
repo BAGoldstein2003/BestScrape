@@ -1,8 +1,9 @@
 import ProductCard from '../components/ProductCard.js'
 import {useState, useEffect} from 'react'
 import {AnimatePresence} from 'framer-motion'
-import './MyProductsPage.css'
 import PriceHistory from '../components/PriceHistory.js'
+import FavoriteCard from '../components/FavoriteCard.js'
+import './MyProductsPage.css'
 
 export default function MyProductsPage({products, getProducts}) {
     const [searchQuery, setSearchQuery] = useState('')
@@ -17,6 +18,19 @@ export default function MyProductsPage({products, getProducts}) {
 
     const handleSortChange = (e) => {
         setSortType(e.target.value);
+    }
+
+    const handleFavorite = (productChecked, isChecked) => {
+        setFavorites((prev) =>
+            isChecked ? 
+                [...prev, productChecked]                      // Add if checked
+            : 
+                prev.filter((product) => product !== productChecked)     // Remove if unchecked
+        );
+    };
+
+    const handleDeleteFavorite = (productDeleted) => {
+        setFavorites((prev) => [prev.filter((product) => product !== productDeleted)])
     }
 
     useEffect(() => {
@@ -57,16 +71,29 @@ export default function MyProductsPage({products, getProducts}) {
                         {
                             filteredProducts.map((product, idx) => (
                                 <ProductCard
-                                    key={product.SKU || idx}
+                                    key={idx}
                                     product={product}
+                                    handleFavorite={handleFavorite}
+                                    favorites={favorites}
+                                    isChecked={favorites.includes(product)}
                                     onShowPriceHistory={() => setPriceHistoryProduct(product)}
+                                    
                                 />
                             ))
                         }
                     </div>
                 </div>
                 <div className="favorites-col">
-                    <h1 className="favorites-title">Your Tracked Products:</h1>
+                    <h1 className="favorites-title"><span>Your </span><span>Tracked </span> <span>Products:</span></h1>
+                    {
+                        favorites.map(product => (
+                            <FavoriteCard
+                             product={product}
+                             handleDelete={handleDeleteFavorite}
+                             onShowPriceHistory={() => setPriceHistoryProduct(product)}
+                            />
+                        ))
+                    }
                 </div>
             </div>
             <AnimatePresence mode='wait'>

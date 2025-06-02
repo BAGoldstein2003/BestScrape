@@ -1,6 +1,10 @@
 import './PriceTrend.css'
 
 export default function PriceTrend({priceHistory}) {
+    //check if array exists and is not-empty or not
+    if (!Array.isArray(priceHistory) || priceHistory.length === 0) {
+        return <h3 className="price">No price data</h3>;
+    }
     
     const newPrice = Number(priceHistory[0].split('=')[1]).toFixed(2)
 
@@ -10,7 +14,7 @@ export default function PriceTrend({priceHistory}) {
 
 
         //if price has increased:
-        if (newPrice > oldPrice) {
+        if (Number(newPrice) > Number(oldPrice)) {
             return (
                 <>
                     <h3 className="price-increased" color='red'>
@@ -23,7 +27,7 @@ export default function PriceTrend({priceHistory}) {
             )
         }
         //if price has decreased:
-        else if (newPrice < oldPrice) {
+        else if (Number(newPrice) < Number(oldPrice)) {
             return (
                 <>  
                     <h3 className='price-decreased'>

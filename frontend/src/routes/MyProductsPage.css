@@ -1,7 +1,5 @@
 .products-page {
     display: flex;
-    
-
 }
 
 .products-list {
@@ -23,10 +21,19 @@
     justify-content: center;
     position: absolute;
     right: 0;
+    margin-top: 11.5rem;
+    margin-right:4rem;
 }
 
 .favorites-title {
-    margin: 4rem;
+
+}
+span:nth-child(2n) {
+color: blue;
+}
+
+span:nth-child(2n+1) {
+    color:grey;
 }
 
 .search-container {
@@ -49,19 +56,3 @@
     gap: 1rem;
 }
 
-.product-card {
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    transition: all 0.1s ease-out;
-}
-
-.product-card:hover {
-    scale: 1.05
-}
-
-.product-card:nth-child(2n) {
-    background-color: blue;
-}
-
-.product-card:nth-child(2n+1) {
-    background-color: yellow;
-}

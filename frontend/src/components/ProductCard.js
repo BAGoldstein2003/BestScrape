@@ -2,30 +2,26 @@ import './ProductCard.css'
 import {useState} from 'react'
 import {motion} from 'framer-motion'
 import PriceTrend from './PriceTrend'
+import { FaHeart } from "react-icons/fa";
 
 
-export default function ProductCard({product, onShowPriceHistory, setFavorites}) {
+export default function ProductCard({product, onShowPriceHistory, handleFavorite, isChecked}) {
 
 
-    const handleFavorite = (event) => {
-        if (event.target.checked) {
-            setFavorites((prev) => [...prev, product]);
-        } 
-        else {
-            setFavorites((prev) => prev.filter((product) => product !== product));
-        }
-    }
+    
 
     return (
         
         <motion.div
-         className={`product-card ${product.direction}`}
+         className={`product-card ${product.direction ? product.direction : ''}`}
          initial={{ scaleX: 0, scaleY: 0, opacity: 0 }}
          animate={{ scaleX: 1, scaleY: 1, opacity: 1 }}
          exit={{ opacity: 0 }}
          transition={{ duration: 0.3 }}
         >   
-            <input type="checkbox"></input>
+            <div className="heart-icon" onClick={() => handleFavorite(product, !isChecked)} style={{ cursor: 'pointer' }}>
+                <FaHeart color={isChecked ? 'red' : 'gray'} size={24} />
+            </div>
             <img className='image' src={product.imgSrc} alt='product'></img>
             <p className="title">{product.title}</p>
             <PriceTrend className="price" priceHistory={product.price_history}></PriceTrend>

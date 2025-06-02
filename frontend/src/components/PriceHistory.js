@@ -72,6 +72,9 @@ export default function PriceHistory({priceHistory, setIsPriceHistory}) {
         };
     }, [priceHistory]);
 
+    if (!Array.isArray(priceHistory) || priceHistory.length === 0) {
+        return <h3 className="price">No price data</h3>;
+    }
 
     return (
         <div className='screen-container'>

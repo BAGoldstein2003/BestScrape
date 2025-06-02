@@ -15,7 +15,7 @@ export default function Modal({typeModal, modalText, setIsModal, isModal}) {
             const handleKeyDown = (event) => {
                 if (event.key === 'Escape') {
                     console.log('Escape key pressed while modal is open');
-                    // Close modal or perform any action
+                    // Close modal
                     setIsModal(false)
                 }
             };
@@ -27,11 +27,6 @@ export default function Modal({typeModal, modalText, setIsModal, isModal}) {
             window.removeEventListener('keydown', handleKeyDown);
         };
     });
-
-    //when users press the x button, close modal window
-    const handleClose = () => {
-        setIsModal(false)
-    }
 
     if (typeModal === 'loading') {
         return (
@@ -68,7 +63,7 @@ export default function Modal({typeModal, modalText, setIsModal, isModal}) {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
                 >
-                    <IoCloseCircle className='close-button' size = "30" onClick={handleClose}></IoCloseCircle>
+                    <IoCloseCircle className='close-button' size = "30" onClick={() => setIsModal(false)}></IoCloseCircle>
                     <h1>ERROR</h1>
                     <MdReportGmailerrorred className="error" size='100' fill="red" ></MdReportGmailerrorred>
                     <p className="desc">{modalText}</p>
@@ -84,10 +79,10 @@ export default function Modal({typeModal, modalText, setIsModal, isModal}) {
                     className="info-area"
                     initial={{ opacity: 0, y: -100 }}
                     animate={{ opacity: 1, y: 0}}
-                    exit={{ opacity: 0 }}
+                    exit={{ opacity: 0, y: -700}}
                     transition={{ duration: 0.3 }}
                 >
-                    <IoCloseCircle className='close-button' size = "30" onClick={handleClose}></IoCloseCircle>
+                    <IoCloseCircle className='close-button' size = "30" onClick={() => {setIsModal(false)}}></IoCloseCircle>
                     <h1>SUCCESS!</h1>
                     <FaCheckCircle className="success" size="100" fill="green"></FaCheckCircle>
                     <p className="desc">{modalText}</p>
