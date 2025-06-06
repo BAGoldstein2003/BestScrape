@@ -15,9 +15,10 @@ export default function ProductCard({product, onShowPriceHistory, handleFavorite
         <motion.div
          className={`product-card ${product.direction ? product.direction : ''}`}
          initial={{ scaleX: 0, scaleY: 0, opacity: 0 }}
-         animate={{ scaleX: 1, scaleY: 1, opacity: 1 }}
          exit={{ opacity: 0 }}
          transition={{ duration: 0.3 }}
+         whileInView={{ scaleX: 1, scaleY: 1, opacity: 1 }}
+         viewport={{once: false, amount: 0.2}}
         >   
             <div className="heart-icon" onClick={() => handleFavorite(product, !isChecked)} style={{ cursor: 'pointer' }}>
                 <FaHeart color={isChecked ? 'red' : 'gray'} size={24} />
