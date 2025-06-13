@@ -6,10 +6,10 @@ import FavoriteCard from '../components/FavoriteCard.js'
 import './MyProductsPage.css'
 
 export default function MyProductsPage({products, getProducts}) {
-    const [searchQuery, setSearchQuery] = useState('')
+    const [searchQuery, setSearchQuery] = useState('');
     const [sortType, setSortType] = useState('name');
     const [priceHistoryProduct, setPriceHistoryProduct] = useState(null);
-    const [favorites, setFavorites] = useState([])
+    const [favorites, setFavorites] = useState([]);
 
     //handles 
     const handleSearch = (e) => {
@@ -30,7 +30,7 @@ export default function MyProductsPage({products, getProducts}) {
     };
 
     const handleDeleteFavorite = (productDeleted) => {
-        setFavorites((prev) => [prev.filter((product) => product !== productDeleted)])
+        setFavorites((prev) => prev.filter((product) => product !== productDeleted));
     }
 
     useEffect(() => {
@@ -38,6 +38,11 @@ export default function MyProductsPage({products, getProducts}) {
         // eslint-disable-next-line
     }, [])
 
+    const trendOrder = {
+        decrease: 0,
+        increase: 1,
+        null: 2,
+    };
     const filteredProducts = products.filter(product =>
         product.title.toLowerCase().includes(searchQuery)
     )
@@ -45,8 +50,13 @@ export default function MyProductsPage({products, getProducts}) {
         if (sortType === 'name') {
             return a.title.localeCompare(b.title);
         }
-        else {
+        else if (sortType === 'price') {
             return a.price - b.price
+        }
+        else if (sortType === 'trend') {
+            const aTrend = a.direction ?? null;
+            const bTrend = b.direction ?? null;
+            return trendOrder[aTrend] - trendOrder[bTrend];
         }
     });
 
@@ -66,6 +76,9 @@ export default function MyProductsPage({products, getProducts}) {
 
                         <label>Sort By Price</label>
                         <input type="radio" name="sort" value="price" checked={sortType === 'price'} onChange={handleSortChange} />
+
+                        <label>Sort By Trend</label>
+                        <input type="radio" name="sort" value="trend" checked={sortType == 'trend'} onChange={handleSortChange} />
                     </div>
                     <div className="products-list">
                         {
