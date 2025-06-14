@@ -37,7 +37,7 @@ function App() {
     setIsModal(true)
     
     try {
-      const response = await fetch('http://localhost:5000/products', {
+      const response = await fetch('https://bestscrape-api-official.onrender.com/products', {
         method: 'GET'
       })
       const products = await response.json()
@@ -76,7 +76,7 @@ function App() {
     setTypeModal('loading')
 
     try {
-      const response = await fetch(`http://localhost:5000/subscribe?userid=${userInfo.id}&useremail=${userInfo.email}`)
+      const response = await fetch(`https://bestscrape-api-official.onrender.com/subscribe?userid=${userInfo.id}&useremail=${userInfo.email}`)
       const data = await response.json();
       console.log('server response:', data)
       if (data.error) {
@@ -100,7 +100,7 @@ function App() {
     const encodedQuery = encodeURIComponent(searchQuery)
     setTypeModal('loading');
     setIsModal(true);
-    const queriedProducts = await fetch(`http://localhost:5000/scrape?query=${encodedQuery}&userid`, {
+    const queriedProducts = await fetch(`https://bestscrape-api-official.onrender.com/scrape?query=${encodedQuery}&userid`, {
       method: 'GET'
     })
     setIsModal(false);

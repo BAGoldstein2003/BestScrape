@@ -101,19 +101,19 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
     }
     else {
       setIsModal(true);
-      setTypeModal('loading')
-      setModalText('Please wait while we register you to our platform')
+      setTypeModal('loading');
+      setModalText('Please wait while we register you to our platform');
       console.log(formData);
-      const response = await fetch('http://localhost:5000/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-      });
-      const data = await response.json();
-
-      if (data.error) {
+      try {
+        const response = await fetch('https://bestscrape-api-official.onrender.com/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+        const data = await response.json();
+        if (data.error) {
         console.error('server error:', data)
         setTypeModal('error');
         setModalText('Uh Oh! A user with the same email has already been found in our database! Please try again with a different email, or log in with the same name');
@@ -152,10 +152,13 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
         }, 500)
         
       }
+      }
+      catch {
+        setIsModal(true);
+        setTypeModal('error');
+        setModalText('Error registering user; Please check your internet connection')
+      }
     }
-
-
-
   }
 
   return (
