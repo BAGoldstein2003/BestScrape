@@ -121,7 +121,9 @@ function App() {
   }, )
 
   useEffect(() => {
-    navigate('/')
+    if (location.pathname === '/authenticate') {
+      navigate('/')
+    }
   }, [])
 
 
