@@ -14,7 +14,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
         setIsModal(true)
         setTypeModal('error')
         setModalText('You must be logged in to view the products page!')
-        navigate('/authenticate')
+        navigate('/')
         return
       }
       if (path === '/search') {
@@ -35,7 +35,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
     if (isRegistered) {
       setIsRegistered(false)
     }
-    navigate('/authenticate')
+    navigate('/')
     document.querySelector('auth-button')
     setIsLogoActive(false)
   }

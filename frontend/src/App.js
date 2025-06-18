@@ -1,5 +1,5 @@
 import './App.css';
-import {useState, useEffect, useCallback} from 'react'
+import {useState, useCallback} from 'react'
 import {Routes, Route, useLocation, useNavigate} from 'react-router'
 import AuthPage from './routes/AuthPage.js'
 import MyProductsPage from './routes/MyProductsPage.js'
@@ -25,7 +25,6 @@ function App() {
     id: null
   });
   const location = useLocation();
-  const navigate = useNavigate();
   const appHeight = ((location.pathname === '/my-products') && (scrapedProducts.length > 8)) ? '100%' : '100vh';
 
 
@@ -114,21 +113,8 @@ function App() {
     console.log(scrapedProducts)
   }
 
-  useEffect(() => {
-    if (location.pathname === '/') {
-      navigate('/authenticate')
-    }
-  }, )
-
-  useEffect(() => {
-    if (location.pathname === '/authenticate') {
-      navigate('/')
-    }
-  }, [])
-
 
   return (
-    
     <div className="App" style={{ height: appHeight }}>
       <div className="gradient-bg"></div>
       {
@@ -143,7 +129,7 @@ function App() {
         }
       <Routes location={location} key={location.pathname}>
         <Route 
-          path='/authenticate' 
+          path='/' 
           element={<AuthPage 
             isRegistered={isRegistered} 
             setIsRegistered={setIsRegistered} 
@@ -168,7 +154,6 @@ function App() {
       </Routes>
     </AnimatePresence>
     </div>
-
   );
 }
 
