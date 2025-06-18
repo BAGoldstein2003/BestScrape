@@ -58,6 +58,7 @@ export default function MyProductsPage({products, getProducts}) {
             const bTrend = b.direction ?? null;
             return trendOrder[aTrend] - trendOrder[bTrend];
         }
+        return null
     });
 
     return (
@@ -78,7 +79,7 @@ export default function MyProductsPage({products, getProducts}) {
                         <input type="radio" name="sort" value="price" checked={sortType === 'price'} onChange={handleSortChange} />
 
                         <label>Sort By Trend</label>
-                        <input type="radio" name="sort" value="trend" checked={sortType == 'trend'} onChange={handleSortChange} />
+                        <input type="radio" name="sort" value="trend" checked={sortType === 'trend'} onChange={handleSortChange} />
                     </div>
                     <div className="products-list">
                         {

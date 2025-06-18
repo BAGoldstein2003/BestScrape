@@ -3,9 +3,6 @@ import PriceTrend from './PriceTrend.js'
 import './FavoriteCard.css'
 
 export default function FavoriteCard({product, handleDelete, onShowPriceHistory}) {
-    const onDelete = () => {
-        handleDelete(product)
-    }
 
     return (
         <motion.div

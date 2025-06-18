@@ -6,12 +6,13 @@ import MyProductsPage from './routes/MyProductsPage.js'
 import SearchPage from './routes/SearchPage.js'
 import Modal from './components/Modal.js'
 import Navbar from './components/Navbar.js'
-import Subscribe from './components/Subscribe.js'
-import PriceHistory from './components/PriceHistory.js'
+import LockScreen from './components/LockScreen.js'
 import {AnimatePresence} from 'framer-motion'
 
 
 function App() {
+  const password = "hilocal123";
+  const [isLocal, setIsLocal] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [scrapedProducts, setScrapedProducts] = useState([]);
   const [isModal, setIsModal] = useState(false);
@@ -53,7 +54,7 @@ function App() {
       getDummyData()
     }
     //save products in state
-  }, [setTypeModal, setModalText, setScrapedProducts])
+  }, [setTypeModal, setModalText, setScrapedProducts, scrapedProducts])
 
 
   const getDummyData = async () => {
@@ -96,6 +97,10 @@ function App() {
     }
   }
 
+  const forgetDevice = () => {
+    setIsLocal(false)
+  }
+
   const searchProducts = async () => {
     const encodedQuery = encodeURIComponent(searchQuery)
     setTypeModal('loading');
@@ -115,12 +120,17 @@ function App() {
     }
   }, )
 
-
+  
   return (
     
     <div className="App" style={{ height: appHeight }}>
       <div className="gradient-bg"></div>
-      <Navbar isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} setTypeModal={setTypeModal} setModalText={setModalText} subscribe={subscribe}/>
+      {
+        !isLocal && <LockScreen password={password} isLocal={isLocal} setIsLocal={setIsLocal}/>
+      }
+      <Navbar isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} 
+       setTypeModal={setTypeModal} setModalText={setModalText} subscribe={subscribe} forgetDevice={forgetDevice}
+      />
       <AnimatePresence>
         {
           isModal && <Modal key="modal" className="loading" typeModal={typeModal} setIsModal={setIsModal} modalText={modalText} isModal={isModal}></Modal>

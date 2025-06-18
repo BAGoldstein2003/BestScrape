@@ -16,7 +16,7 @@ export default function LockScreen({password, isLocal, setIsLocal}) {
     }
     return (
         <div className="ls-background">
-            <TypingEffect text="Please enter the password provided by the developer to be granted access" speed={20} />
+            <TypingEffect text="P lease enter the password provided by the developer to be granted access" speed={20} />
             <input onChange={handleChange} onKeyDown={handleKeyDown} value={attemptedPassword} className="pw-input" type='text'></input>
         </div>
     )

@@ -3,14 +3,12 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router'
 import { FcSearch } from "react-icons/fc";
 import { CiCircleList } from "react-icons/ci";
-import Subscribe from './Subscribe.js'
 
-export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTypeModal, setModalText}) {
+export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTypeModal, setModalText, forgetDevice}) {
   const [isLogoActive, setIsLogoActive] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = (path) => {
-
     if (!isRegistered) {
       if (path === '/my-products') {
         setIsModal(true)
@@ -26,7 +24,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
         return
       }
     }
-      navigate(path)
+    navigate(path)
   }
 
   const handleLogoClick = () => {
@@ -50,6 +48,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
           <img onClick={() => handleLogoClick()} className="logo" alt="logo" src="BEST_SCRAPE-removebg-preview.png"></img>
           <div className={`logo-options ${isLogoActive ? 'active' : ''}`}>
             <button className={`auth-button ${isRegistered ? 'log-out' : 'log-in'}`} onClick={changeAuthState}>{isRegistered ? 'Log Out' : 'Log In'}</button>
+            <button className='forget-device' onClick={forgetDevice}>Forget This Device</button>
           </div>
           <div className="products" onClick={() => handleClick('/my-products')}>
             <CiCircleList size="50" fill="grey"/>
