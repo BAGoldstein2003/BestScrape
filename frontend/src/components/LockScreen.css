@@ -1,0 +1,19 @@
+.ls-background {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    background-color: grey;
+    flex-direction: column;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.pw-input {
+    text-align: center;
+}
