@@ -3,23 +3,11 @@
     src: url('../../public/Futura Extra Bold.otf')
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateX(50px) translateY(0) ;
-    
-  }
-  50% {
-    transform: translateX(-50px) translateY(-50px);
-
-  }
-}
-
-@keyframes rotate { 100% { transform:rotate(-360deg); } }
-
 .image {
     width: 5rem;
     align-self: center;
 }
+
 .welcome {
     justify-content: center;
     font-family: 'best buy';
@@ -30,10 +18,6 @@
     margin: 3rem;
 }
 
-.welcome:hover {
-    
-}
-
 .info {
     font-family: 'best buy';
     font-weight: lighter;
@@ -41,6 +25,7 @@
     margin-bottom: 3rem;
     size: 20%;
 }
+
 .form-container {
     padding: 3rem;
     justify-self: center;
@@ -102,8 +87,6 @@
 .field > label:nth-child(2n) {
     color: grey;
 }
-
-
 
 .buttons {
     font-family: 'Best Buy'
