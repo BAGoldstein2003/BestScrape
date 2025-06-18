@@ -113,45 +113,45 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
           body: JSON.stringify(formData)
         });
         const data = await response.json();
-        if (data.error) {
-        console.error('server error:', data)
-        setTypeModal('error');
-        setModalText('Uh Oh! A user with the same email has already been found in our database! Please try again with a different email, or log in with the same name');
-        return;
-      }
 
-      else if (data.login) {
-        console.log('server response:', data);
-        setUserInfo({
-          name: data.User.name,
-          email: data.User.email,
-          id: data.User.userid
-        })
-        setIsRegistered(true);
-        setIsModal(false);
-        setIsModal(true)
-        setTypeModal('success');
-        setModalText('Successfully Logged In!');
-        localStorage.setItem('userData', {'name': data.User.name, 'email': data.User.email})
-      }
-
-      else if (data.register) {
-        console.log('server response: ', data)
-        setUserInfo({
-          name: data.User.name,
-          email: data.User.email,
-          id: data.User.userid
-        })
-        setIsRegistered(true);
-        setIsModal(false)
+        //Wait 500 milliseconds, then display response modal
         setTimeout(() => {
-          setIsModal(true)
-          setTypeModal('success')
-          setModalText('Successfully Registered!')
-          localStorage.setItem('userData', {'name': data.User.name, 'email': data.User.email})
-        }, 500)
+          if (data.error) {
+            console.error('server error:', data)
+            setTypeModal('error');
+            setModalText('Uh Oh! A user with the same email has already been found in our database! Please try again with a different email, or log in with the same name');
+            return;
+          }
+          else if (data.login) {
+            console.log('server response:', data);
+            setUserInfo({
+              name: data.User.name,
+              email: data.User.email,
+              id: data.User.userid
+            })
+            setIsRegistered(true);
+            setIsModal(false);
+            setIsModal(true)
+            setTypeModal('success');
+            setModalText('Successfully Logged In!');
+            localStorage.setItem('userData', {'name': data.User.name, 'email': data.User.email})
+          }
+          else if (data.register) {
+            console.log('server response: ', data)
+            setUserInfo({
+              name: data.User.name,
+              email: data.User.email,
+              id: data.User.userid
+            })
+            setIsRegistered(true);
+            setIsModal(false)
+            setIsModal(true)
+            setTypeModal('success')
+            setModalText('Successfully Registered!')
+            localStorage.setItem('userData', {'name': data.User.name, 'email': data.User.email})
         
-      }
+          }
+        }, 500)
       }
       catch {
         setIsModal(true);

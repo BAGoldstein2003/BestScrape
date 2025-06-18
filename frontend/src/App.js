@@ -8,10 +8,13 @@ import Modal from './components/Modal.js'
 import Navbar from './components/Navbar.js'
 import Subscribe from './components/Subscribe.js'
 import PriceHistory from './components/PriceHistory.js'
+import LockScreen from './components/LockScreen.js'
 import {AnimatePresence} from 'framer-motion'
 
 
 function App() {
+  const localPassword = "hilocal123";
+  const [isLocal, setIsLocal] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [scrapedProducts, setScrapedProducts] = useState([]);
   const [isModal, setIsModal] = useState(false);
@@ -119,7 +122,7 @@ function App() {
   return (
     
     <div className="App" style={{ height: appHeight }}>
-      <div className="gradient-bg"></div>
+      <div className="gradient-bg"></div> 
       <Navbar isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} setTypeModal={setTypeModal} setModalText={setModalText} subscribe={subscribe}/>
       <AnimatePresence>
         {

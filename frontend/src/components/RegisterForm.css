@@ -51,7 +51,6 @@
     border-radius: 1rem;
     place-content: center;
     justify-content: center;
-    transition: all 0.3s ease-out;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
