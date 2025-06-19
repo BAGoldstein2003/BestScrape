@@ -1,19 +1,76 @@
-.ls-background {
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    background-color: grey;
-    flex-direction: column;
-    font-family:'Courier New', Courier, monospace;
+/*Mobile*/
+@media (max-width: 781px) {
+    .ls-background {
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 999;
+        background-color: grey;
+        flex-direction: column;
+        /*font-family:'Courier New', Courier, monospace;**/
+        font-family:'Times New Roman', Times, serif;
+    }
+
+    .text {
+        text-align: center;
+    }
+    .text-input {
+        text-align: center;
+        border-radius: 50px;
+    }
+
+    .text-input:focus {
+        outline: none;
+    }
+
+   #already-otp {
+    width: 40vw;
+    color: red;
+   }
 }
 
-.pw-input {
-    text-align: center;
+/*Desktop*/
+@media (min-width: 780px) {
+    .ls-background {
+        position: fixed;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 999;
+        background-color: grey;
+        flex-direction: column;
+        font-family:'Times New Roman', Times, serif
+    }
+
+    .text {
+        text-align: center;
+    }
+    .text-input {
+        text-align: center;
+        border-radius: 50px;
+    }
+
+    .text-input:focus {
+        outline: none;
+    }
+}
+
+.text.active {
+    display: inline-block;
+    color: red;
+}
+
+.text.inactive {
+    display: none;
 }

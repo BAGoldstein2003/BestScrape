@@ -22,6 +22,9 @@ const pages = [
         onChange={(e) => {
           //if new character is valid, append to form
           const input = e.target.value;
+          if (input.length > 30) {
+            alert('Email can not exceed 30 characters!');
+          }
           setFormData({ ...formData, email: input});
               }}
       /></label>

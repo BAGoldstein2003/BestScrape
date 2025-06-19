@@ -12,7 +12,6 @@ import {AnimatePresence} from 'framer-motion'
 
 
 function App() {
-  const localPassword = "hilocal123";
   const [isLocal, setIsLocal] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [scrapedProducts, setScrapedProducts] = useState([]);
@@ -137,7 +136,7 @@ function App() {
     <div className="App" style={{ height: appHeight }}>
       <div className="gradient-bg"></div>
       {
-        !isLocal && <LockScreen password={localPassword} setIsLocal={setIsLocal} />
+        !isLocal && <LockScreen setIsLocal={setIsLocal} />
       }
       <Navbar className="navbar-app" isRegistered={isRegistered}
        setIsRegistered={setIsRegistered}

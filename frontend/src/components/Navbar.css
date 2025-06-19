@@ -1,4 +1,4 @@
-@media (max-width: 1200px) {
+@media (max-width: 780px) {
   .navbar {
     flex-direction: column;
     gap: 1rem;
@@ -7,7 +7,7 @@
   }
 
   .logo-options {
-    left: 35%;
+    left: 14vw;
     justify-self: center;
   }
 
