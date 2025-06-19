@@ -68,15 +68,15 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
       <>
         <div className="navbar">
           <img onClick={() => handleLogoClick()} className="logo" alt="logo" src="BEST_SCRAPE-removebg-preview.png"/>
-          <div className="products" onClick={() => handleClick('/my-products')}>
+          <div className="nav-option" onClick={() => handleClick('/my-products')}>
             <CiCircleList className="products-icon" size="50" fill="grey"/>
             <p className="products-link">View Products</p>
           </div>
-          <div className="favorites" onClick={() => handleClick('/favorites')}>
+          <div className="nav-option" onClick={() => handleClick('/favorites')}>
             <FaHeart className="favorites-icon" size="50" fill="pink"/>
             <p className="favorites-link">Your Favorites</p>
           </div>
-          <div className="search" onClick={() => handleClick('/search')}>
+          <div className="nav-option" onClick={() => handleClick('/search')}>
             <FcSearch className="search-icon" size="50" />
             <p className="search-link">Search For Products</p>
           </div>

@@ -1,4 +1,4 @@
-@media (max-width: 780px) {
+@media (max-width: 1200px) {
   .navbar {
     flex-direction: column;
     gap: 1rem;
@@ -7,6 +7,7 @@
   }
 
   .logo-options {
+    left: 35%;
     justify-self: center;
   }
 
@@ -88,7 +89,7 @@
 
 .search-link {
   text-decoration: none;
-  color: black;
+  color: grey;
 }
 
 .search:hover {
@@ -128,7 +129,7 @@
   color: grey;
 }
 
-.favorites {
+.nav-option {
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -140,9 +141,9 @@
 
 .favorites-link {
   text-decoration: none;
-  color: black;
+  color: grey;
 }
-.favorites:hover {
+.nav-option:hover {
   scale: 1.2;
   background-color: yellow;
   cursor: pointer;
