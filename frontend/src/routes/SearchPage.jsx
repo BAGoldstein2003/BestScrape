@@ -1,4 +1,4 @@
-import ProductSearch from '../components/ProductSearch.js'
+import ProductSearch from '../components/ProductSearch.jsx'
 import './SearchPage.css'
 import {motion} from 'framer-motion'
 

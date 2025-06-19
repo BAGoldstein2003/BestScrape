@@ -1,4 +1,5 @@
 import './ProductCard.css'
+import {useState} from 'react'
 import {motion} from 'framer-motion'
 import PriceTrend from './PriceTrend'
 import { FaHeart } from "react-icons/fa";

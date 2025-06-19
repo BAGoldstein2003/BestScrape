@@ -1,5 +1,6 @@
 import Chart from 'chart.js/auto';
 import {useEffect, useRef } from 'react'
+import {motion} from 'framer-motion'
 import { IoCloseCircle } from "react-icons/io5";
 import './PriceHistory.css'
 

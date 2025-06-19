@@ -1,4 +1,4 @@
-import RegisterForm from '../components/RegisterForm.js'
+import RegisterForm from '../components/RegisterForm.jsx'
 import './AuthPage.css'
 import {motion, AnimatePresence } from 'framer-motion'
 

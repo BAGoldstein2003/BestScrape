@@ -57,7 +57,7 @@ export default function Modal({typeModal, modalText, setIsModal, isModal}) {
             <motion.div className={`modal-background ${typeModal} `}>
                 
                 <motion.div
-                    className={`info-area ${typeModal}`}
+                    className="info-area"
                     initial={{ opacity: 0, y: -100 }}
                     animate={{ opacity: 1, y: 0}}
                     exit={{ opacity: 0 }}

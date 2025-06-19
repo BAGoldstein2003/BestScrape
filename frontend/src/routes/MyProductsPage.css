@@ -1,5 +1,6 @@
 .products-page {
     display: flex;
+    justify-content: center;
 }
 
 .products-list {
@@ -8,25 +9,15 @@
 }
 
 .products-col {
+    margin-top: 3rem;
+    justify-self: center;
     position: absolute;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 4rem;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
-}
-
-.favorites-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: absolute;
-    right: 0;
-    margin: 4rem;
-    padding: 1rem;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    border-radius: 1rem;
+    width: 95vw;
 }
 
 span:nth-child(2n) {
@@ -56,4 +47,3 @@ span:nth-child(2n+1) {
     justify-content: center;
     gap: 1rem;
 }
-

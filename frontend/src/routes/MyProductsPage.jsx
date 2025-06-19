@@ -1,15 +1,14 @@
-import ProductCard from '../components/ProductCard.js'
+import ProductCard from '../components/ProductCard.jsx'
 import {useState, useEffect} from 'react'
 import {AnimatePresence} from 'framer-motion'
-import PriceHistory from '../components/PriceHistory.js'
-import FavoriteCard from '../components/FavoriteCard.js'
+import PriceHistory from '../components/PriceHistory.jsx'
+import FavoriteCard from '../components/FavoriteCard.jsx'
 import './MyProductsPage.css'
 
-export default function MyProductsPage({products, getProducts}) {
+export default function MyProductsPage({products, favorites, handleFavorite, handleDeleteFavorite, getProducts, priceHistoryProduct, setPriceHistoryProduct}) {
     const [searchQuery, setSearchQuery] = useState('');
     const [sortType, setSortType] = useState('name');
-    const [priceHistoryProduct, setPriceHistoryProduct] = useState(null);
-    const [favorites, setFavorites] = useState([]);
+    
 
     //handles 
     const handleSearch = (e) => {
@@ -18,19 +17,6 @@ export default function MyProductsPage({products, getProducts}) {
 
     const handleSortChange = (e) => {
         setSortType(e.target.value);
-    }
-
-    const handleFavorite = (productChecked, isChecked) => {
-        setFavorites((prev) =>
-            isChecked ? 
-                [...prev, productChecked]                      // Add if checked
-            : 
-                prev.filter((product) => product !== productChecked)     // Remove if unchecked
-        );
-    };
-
-    const handleDeleteFavorite = (productDeleted) => {
-        setFavorites((prev) => prev.filter((product) => product !== productDeleted));
     }
 
     useEffect(() => {
@@ -58,7 +44,6 @@ export default function MyProductsPage({products, getProducts}) {
             const bTrend = b.direction ?? null;
             return trendOrder[aTrend] - trendOrder[bTrend];
         }
-        return null
     });
 
     return (
@@ -79,7 +64,7 @@ export default function MyProductsPage({products, getProducts}) {
                         <input type="radio" name="sort" value="price" checked={sortType === 'price'} onChange={handleSortChange} />
 
                         <label>Sort By Trend</label>
-                        <input type="radio" name="sort" value="trend" checked={sortType === 'trend'} onChange={handleSortChange} />
+                        <input type="radio" name="sort" value="trend" checked={sortType == 'trend'} onChange={handleSortChange} />
                     </div>
                     <div className="products-list">
                         {
@@ -96,18 +81,6 @@ export default function MyProductsPage({products, getProducts}) {
                             ))
                         }
                     </div>
-                </div>
-                <div className="favorites-col">
-                    <h1 className="favorites-title"><span>Your </span><span>Tracked </span> <span>Products:</span></h1>
-                    {
-                        favorites.map(product => (
-                            <FavoriteCard
-                             product={product}
-                             handleDelete={handleDeleteFavorite}
-                             onShowPriceHistory={() => setPriceHistoryProduct(product)}
-                            />
-                        ))
-                    }
                 </div>
             </div>
             <AnimatePresence mode='wait'>
