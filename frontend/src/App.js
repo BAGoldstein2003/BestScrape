@@ -1,14 +1,12 @@
 import './App.css';
 import {useState, useEffect, useCallback} from 'react'
 import {Routes, Route, useLocation, useNavigate} from 'react-router'
-import AuthPage from './routes/AuthPage.js'
-import MyProductsPage from './routes/MyProductsPage.js'
-import SearchPage from './routes/SearchPage.js'
-import Modal from './components/Modal.js'
-import Navbar from './components/Navbar.js'
-import Subscribe from './components/Subscribe.js'
-import PriceHistory from './components/PriceHistory.js'
-import LockScreen from './components/LockScreen.js'
+import AuthPage from './routes/AuthPage.jsx'
+import MyProductsPage from './routes/MyProductsPage.jsx'
+import SearchPage from './routes/SearchPage.jsx'
+import FavoritesPage from './routes/FavoritesPage.jsx'
+import Modal from './components/Modal.jsx'
+import Navbar from './components/Navbar.jsx'
 import {AnimatePresence} from 'framer-motion'
 
 
@@ -17,6 +15,8 @@ function App() {
   const [isLocal, setIsLocal] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [scrapedProducts, setScrapedProducts] = useState([]);
+  const [priceHistoryProduct, setPriceHistoryProduct] = useState(null);
+  const [favorites, setFavorites] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [typeModal, setTypeModal] = useState('');
   const [modalText, setModalText] = useState('');
@@ -40,7 +40,7 @@ function App() {
     setIsModal(true)
     
     try {
-      const response = await fetch('https://bestscrape-api-official.onrender.com/products', {
+      const response = await fetch('http://localhost:5000/products', {
         method: 'GET'
       })
       const products = await response.json()
@@ -58,6 +58,19 @@ function App() {
     //save products in state
   }, [setTypeModal, setModalText, setScrapedProducts])
 
+
+  const handleFavorite = (productChecked, isChecked) => {
+    setFavorites((prev) =>
+      isChecked ? 
+        [...prev, productChecked]                      // Add if checked
+      : 
+        prev.filter((product) => product !== productChecked)     // Remove if unchecked
+    );
+  };
+
+  const handleDeleteFavorite = (productDeleted) => {
+    setFavorites((prev) => prev.filter((product) => product !== productDeleted));
+  }
 
   const getDummyData = async () => {
     try {
@@ -79,7 +92,7 @@ function App() {
     setTypeModal('loading')
 
     try {
-      const response = await fetch(`https://bestscrape-api-official.onrender.com/subscribe?userid=${userInfo.id}&useremail=${userInfo.email}`)
+      const response = await fetch(`http://127.0.0.1:5000/subscribe?userid=${userInfo.id}&useremail=${userInfo.email}`)
       const data = await response.json();
       console.log('server response:', data)
       if (data.error) {
@@ -103,7 +116,7 @@ function App() {
     const encodedQuery = encodeURIComponent(searchQuery)
     setTypeModal('loading');
     setIsModal(true);
-    const queriedProducts = await fetch(`https://bestscrape-api-official.onrender.com/scrape?query=${encodedQuery}&userid`, {
+    const queriedProducts = await fetch(`http://127.0.0.1:5000/scrape?query=${encodedQuery}&userid`, {
       method: 'GET'
     })
     setIsModal(false);
@@ -123,7 +136,7 @@ function App() {
     
     <div className="App" style={{ height: appHeight }}>
       <div className="gradient-bg"></div> 
-      <Navbar isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} setTypeModal={setTypeModal} setModalText={setModalText} subscribe={subscribe}/>
+      <Navbar className="navbar-app" isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} setTypeModal={setTypeModal} setModalText={setModalText} subscribe={subscribe}/>
       <AnimatePresence>
         {
           isModal && <Modal key="modal" className="loading" typeModal={typeModal} setIsModal={setIsModal} modalText={modalText} isModal={isModal}></Modal>
@@ -143,7 +156,13 @@ function App() {
         />
         <Route
           path='/my-products'
-          element={<MyProductsPage products={scrapedProducts} getProducts={getProducts}/>}
+          element={<MyProductsPage products={scrapedProducts}
+          favorites={favorites}
+          handleFavorite={handleFavorite}
+          handleDeleteFavorite={handleDeleteFavorite}
+          getProducts={getProducts}
+          priceHistoryProduct={priceHistoryProduct}
+          setPriceHistoryProduct={setPriceHistoryProduct}/>}
         />
         <Route
           path='/search'
@@ -151,6 +170,15 @@ function App() {
             searchProducts={searchProducts}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}/>}
+        />
+        <Route
+          path='/favorites'
+          element={<FavoritesPage
+            favorites={favorites} 
+            handleDeleteFavorite={handleDeleteFavorite}
+            priceHistoryProduct={priceHistoryProduct}
+            setPriceHistoryProduct={setPriceHistoryProduct}/>
+          }
         />
       </Routes>
     </AnimatePresence>

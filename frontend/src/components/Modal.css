@@ -22,6 +22,20 @@
   }
 }
 
+@media (max-width: 780px) {
+  .info-area {
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    position: fixed;
+    width: 70%;
+    flex-direction: column;
+    background: linear-gradient(yellow, grey);
+    border-radius: 1rem;
+    padding: 5%;
+  }
+}
+
 .shake {
   animation: shake 0.5s ease-in-out;
 }
@@ -51,19 +65,20 @@
   background-color: rgba(0, 255, 0, 0.05);
   
 }
-
-.info-area {
-  justify-content: space-around;
-  align-items: center;
-  display: flex;
-  position: fixed;
-  flex-direction: column;
-  width: 31.25rem;
-  height: 31.25rem;
-  background: linear-gradient(yellow, grey);
-  border-radius: 1rem;
-  padding: .5rem;
+@media (min-width: 781px) {
+  .info-area {
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    position: fixed;
+    width: 31rem;
+    flex-direction: column;
+    background: linear-gradient(yellow, grey);
+    border-radius: 1rem;
+    padding: 5%;
+  }
 }
+
 
 .modal-background.success>.info-area {
   animation: flip 0.5s ease-in-out;

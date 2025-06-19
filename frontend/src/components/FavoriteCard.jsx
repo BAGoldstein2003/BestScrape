@@ -1,5 +1,5 @@
 import {motion} from 'framer-motion'
-import PriceTrend from './PriceTrend.js'
+import PriceTrend from './PriceTrend.jsx'
 import './FavoriteCard.css'
 
 export default function FavoriteCard({product, handleDelete, onShowPriceHistory}) {
