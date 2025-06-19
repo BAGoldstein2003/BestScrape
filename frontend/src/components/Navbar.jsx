@@ -6,7 +6,7 @@ import { FcSearch } from "react-icons/fc";
 import { FaHeart } from "react-icons/fa";
 import Subscribe from './Subscribe.jsx'
 
-export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTypeModal, setModalText}) {
+export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTypeModal, setModalText, forgetDevice}) {
   const [isLogoActive, setIsLogoActive] = useState(false);
   const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
           setIsModal(true)
           setTypeModal('error')
           setModalText('You must be logged in to view all products!')
-          navigate('/authenticate')
+          navigate('/')
           break;
         }
         else {
@@ -57,11 +57,15 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
     if (isRegistered) {
       setIsRegistered(false)
     }
-    navigate('/authenticate')
+    navigate('/')
     document.querySelector('auth-button')
     setIsLogoActive(false)
   }
   
+  const forgetDeviceAndHideOptions = () => {
+    forgetDevice();
+    setIsLogoActive(false);
+  }
   
 
     return (
@@ -84,6 +88,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
         
         <div className={`logo-options ${isLogoActive ? 'active' : ''}`}>
           <button className={`auth-button ${isRegistered ? 'log-out' : 'log-in'}`} onClick={changeAuthState}>{isRegistered ? 'Log Out' : 'Log In'}</button>
+          <button className='forget-device' onClick={forgetDeviceAndHideOptions}>Forget This Device</button>
         </div>
       </>
     )

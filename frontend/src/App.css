@@ -12,12 +12,6 @@
   }
 }
 
-@media (max-width: 780px) {
-  .navbar {
-    position: absolute;
-    bottom: 0;
-  }
-}
 .welcome-user {
   margin: 3rem;
   font-size: larger;
@@ -43,9 +37,6 @@ html, body {
   text-align: center;
 }
 
-.navbar-app {
-  position: absolute;
-}
 .subscribe {
   display: flex;
   justify-content: center;

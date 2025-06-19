@@ -1,22 +1,20 @@
 import './App.css';
-import {useState, useEffect, useCallback} from 'react'
+import {useState, useCallback} from 'react'
 import {Routes, Route, useLocation, useNavigate} from 'react-router'
 import AuthPage from './routes/AuthPage.jsx'
 import MyProductsPage from './routes/MyProductsPage.jsx'
 import SearchPage from './routes/SearchPage.jsx'
-import FavoritesPage from './routes/FavoritesPage.jsx'
 import Modal from './components/Modal.jsx'
 import Navbar from './components/Navbar.jsx'
+import LockScreen from './components/LockScreen.jsx'
 import {AnimatePresence} from 'framer-motion'
 
 
 function App() {
-  const localPassword = "hilocal123";
+  const password = "hilocal123";
   const [isLocal, setIsLocal] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
   const [scrapedProducts, setScrapedProducts] = useState([]);
-  const [priceHistoryProduct, setPriceHistoryProduct] = useState(null);
-  const [favorites, setFavorites] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [typeModal, setTypeModal] = useState('');
   const [modalText, setModalText] = useState('');
@@ -27,7 +25,6 @@ function App() {
     id: null
   });
   const location = useLocation();
-  const navigate = useNavigate();
   const appHeight = ((location.pathname === '/my-products') && (scrapedProducts.length > 8)) ? '100%' : '100vh';
 
 
@@ -56,21 +53,8 @@ function App() {
       getDummyData()
     }
     //save products in state
-  }, [setTypeModal, setModalText, setScrapedProducts])
+  }, [setTypeModal, setModalText, setScrapedProducts, scrapedProducts])
 
-
-  const handleFavorite = (productChecked, isChecked) => {
-    setFavorites((prev) =>
-      isChecked ? 
-        [...prev, productChecked]                      // Add if checked
-      : 
-        prev.filter((product) => product !== productChecked)     // Remove if unchecked
-    );
-  };
-
-  const handleDeleteFavorite = (productDeleted) => {
-    setFavorites((prev) => prev.filter((product) => product !== productDeleted));
-  }
 
   const getDummyData = async () => {
     try {
@@ -112,6 +96,10 @@ function App() {
     }
   }
 
+  const forgetDevice = () => {
+    setIsLocal(false)
+  }
+
   const searchProducts = async () => {
     const encodedQuery = encodeURIComponent(searchQuery)
     setTypeModal('loading');
@@ -125,25 +113,23 @@ function App() {
     console.log(scrapedProducts)
   }
 
-  useEffect(() => {
-    if (location.pathname === '/') {
-      navigate('/authenticate')
-    }
-  }, )
-
 
   return (
-    
     <div className="App" style={{ height: appHeight }}>
-      <div className="gradient-bg"></div> 
-      <Navbar className="navbar-app" isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} setTypeModal={setTypeModal} setModalText={setModalText} subscribe={subscribe}/>
+      <div className="gradient-bg"></div>
+      {
+        !isLocal && <LockScreen password={password} isLocal={isLocal} setIsLocal={setIsLocal}/>
+      }
+      <Navbar isRegistered={isRegistered} setIsRegistered={setIsRegistered} setIsModal={setIsModal} 
+       setTypeModal={setTypeModal} setModalText={setModalText} subscribe={subscribe} forgetDevice={forgetDevice}
+      />
       <AnimatePresence>
         {
           isModal && <Modal key="modal" className="loading" typeModal={typeModal} setIsModal={setIsModal} modalText={modalText} isModal={isModal}></Modal>
         }
       <Routes location={location} key={location.pathname}>
         <Route 
-          path='/authenticate' 
+          path='/' 
           element={<AuthPage 
             isRegistered={isRegistered} 
             setIsRegistered={setIsRegistered} 
@@ -156,13 +142,7 @@ function App() {
         />
         <Route
           path='/my-products'
-          element={<MyProductsPage products={scrapedProducts}
-          favorites={favorites}
-          handleFavorite={handleFavorite}
-          handleDeleteFavorite={handleDeleteFavorite}
-          getProducts={getProducts}
-          priceHistoryProduct={priceHistoryProduct}
-          setPriceHistoryProduct={setPriceHistoryProduct}/>}
+          element={<MyProductsPage products={scrapedProducts} getProducts={getProducts}/>}
         />
         <Route
           path='/search'
@@ -171,19 +151,9 @@ function App() {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}/>}
         />
-        <Route
-          path='/favorites'
-          element={<FavoritesPage
-            favorites={favorites} 
-            handleDeleteFavorite={handleDeleteFavorite}
-            priceHistoryProduct={priceHistoryProduct}
-            setPriceHistoryProduct={setPriceHistoryProduct}/>
-          }
-        />
       </Routes>
     </AnimatePresence>
     </div>
-
   );
 }
 

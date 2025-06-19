@@ -24,8 +24,6 @@
     flex-wrap: wrap;
     overflow: hidden;
   }
-
-
 .logo {
   margin-left: 1rem;
   transition: all 0.3s ease-out;
@@ -77,6 +75,15 @@
   background-color: yellow;
   box-shadow: 0 1px 5px rgb(0, 0, 0, 0.5);
 }
+
+.forget-device {
+  border: none;
+  border-radius: .5rem;
+  color: rgb(230, 92, 92);
+  background-color: blue;
+  box-shadow: 0 1px 5px rgb(0, 0, 0, 0.5);
+}
+
 .search {
   display: flex;
   gap: 1rem;
@@ -115,7 +122,7 @@
 
 .products-link {
   text-decoration: none;
-  color: black;
+  color: grey;
 }
 
 .products:hover {

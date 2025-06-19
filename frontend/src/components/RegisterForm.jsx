@@ -105,7 +105,7 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
       setModalText('Please wait while we register you to our platform');
       console.log(formData);
       try {
-        const response = await fetch('https://bestscrape-api-official.onrender.com/register', {
+        const response = await fetch('http://127.0.0.1:5000/register', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

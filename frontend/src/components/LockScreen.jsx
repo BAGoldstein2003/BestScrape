@@ -43,11 +43,6 @@ export default function LockScreen({password, isLocal, setIsLocal}) {
             .then((result) => {
                 console.log('OTP sent successfully:', result.text);
             })
-            .then(setFormData({
-                name: '',
-                email: '',
-                message: ''
-            }))
             .catch((error) => {
                 console.error('Email send failed:', error.text);
             })
