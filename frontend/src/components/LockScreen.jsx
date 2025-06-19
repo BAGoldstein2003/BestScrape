@@ -6,18 +6,11 @@ import emailjs from '@emailjs/browser';
 export default function LockScreen({password, isLocal, setIsLocal}) {
     const [attemptedPassword, setAttemptedPassword] = useState('');
     const [randomPassword, setRandomPassword] = useState(() => {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        let password = '';
-        for (let i = 0; i < 6; i++) {
-          
-          password = password + chars.charAt(Math.floor(Math.random() * chars.length));
-        }
-
-        return password;
+        
     })
 
     useEffect(() => {
-      OneTimePassword()
+      oneTimePassword()
     }, [])
 
     const handleChange = (e) => {
@@ -25,20 +18,27 @@ export default function LockScreen({password, isLocal, setIsLocal}) {
     }
 
     const handleKeyDown = (e) => {
-        if (e.key === 'Enter' && attemptedPassword === password) {
+        if (e.key === 'Enter' && attemptedPassword === randomPassword) {
             setIsLocal(true)
             console.log(isLocal)
         }
     }
 
-    const OneTimePassword = () => {
+    const oneTimePassword = () => {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let password = '';
+      for (let i = 0; i < 6; i++) {
+        password = password + chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      setRandomPassword(password)
       const emailParams = {
-        OTP: randomPassword
+        OTP: password
       }
       emailjs.send(
                 'bestscrapeotp',             
                 'template_o3hl8ze',          
-                emailParams
+                emailParams,
+                'Hr59z37C7JXW3Ecf3'
             )
             .then((result) => {
                 console.log('OTP sent successfully:', result.text);
@@ -50,6 +50,9 @@ export default function LockScreen({password, isLocal, setIsLocal}) {
 
     return (
         <div className="ls-background">
+          <button onClick={() => {
+            oneTimePassword()
+          }}>get OTP</button>
             <TypingEffect text="Please enter the password provided by the developer to be granted access" speed={20} />
             <input onChange={handleChange} onKeyDown={handleKeyDown} value={attemptedPassword} className="pw-input" type='text'></input>
         </div>
