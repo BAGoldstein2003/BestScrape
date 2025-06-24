@@ -39,8 +39,6 @@
         margin-bottom: 3rem;
     }
 
-
-
     .info {
         font-family: 'best buy';
         font-weight: lighter;
@@ -76,6 +74,7 @@
         text-align: center;
         transition: all 0.3s ease-out;
         white-space: normal;
+        word-wrap: break-word;
     }
 
     .form-input {
