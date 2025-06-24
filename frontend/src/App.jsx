@@ -1,5 +1,5 @@
 import './App.css';
-import {useState, useCallback} from 'react'
+import {useState, useCallback, useEffect} from 'react'
 import {Routes, Route, useLocation, useNavigate} from 'react-router'
 import AuthPage from './routes/AuthPage.jsx'
 import MyProductsPage from './routes/MyProductsPage.jsx'
@@ -26,21 +26,21 @@ function App() {
     email: null,
     id: null
   });
+  const [pageNum, setPageNum] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(25);
+  const [sortType, setSortType] = useState('name');
   const location = useLocation();
   const navigate = useNavigate();
-  const appHeight = ((location.pathname === '/my-products') && (scrapedProducts.length > 8)) ? '100%' : '100vh';
+  const appHeight = (location.pathname === '/my-products') ? '100%' : '100vh';
 
-
+  //CHANGE BACK TO HOSTED API AFTER TESTING
   const getProducts = useCallback(async () => {
-    if (scrapedProducts.length !== 0) {
-      return
-    }
     setTypeModal('loading')
     setModalText('Loading Product Data. Please be patient')
     setIsModal(true)
     
     try {
-      const response = await fetch('https://bestscrape-api-official.onrender.com//products', {
+      const response = await fetch(`https://bestscrape-api-official.onrender.com/products?pageNum=${pageNum}&itemsPerPage=${itemsPerPage}&sortType=${sortType}`, {
         method: 'GET'
       })
       const products = await response.json()
@@ -56,15 +56,15 @@ function App() {
       getDummyData()
     }
     //save products in state
-  }, [setTypeModal, setModalText, setScrapedProducts])
+  }, [pageNum, itemsPerPage, sortType, setTypeModal, setModalText, setScrapedProducts])
 
 
   const handleFavorite = (productChecked, isChecked) => {
     setFavorites((prev) =>
       isChecked ? 
-        [...prev, productChecked]                      // Add if checked
+        [...prev, productChecked]                      
       : 
-        prev.filter((product) => product !== productChecked)     // Remove if unchecked
+        prev.filter((product) => product !== productChecked)
     );
   };
 
@@ -92,7 +92,7 @@ function App() {
     setTypeModal('loading')
 
     try {
-      const response = await fetch(`https://bestscrape-api-official.onrender.com//subscribe?userid=${userInfo.id}&useremail=${userInfo.email}`)
+      const response = await fetch(`https://bestscrape-api-official.onrender.com/subscribe?userid=${userInfo.id}&useremail=${userInfo.email}`)
       const data = await response.json();
       console.log('server response:', data)
       if (data.error) {
@@ -130,6 +130,10 @@ function App() {
     console.log(scrapedProducts)
   }
 
+  useEffect(() => {
+    getProducts();
+    // eslint-disable-next-line
+  }, [getProducts]);
 
   return (
     
@@ -165,6 +169,12 @@ function App() {
         <Route
           path='/my-products'
           element={<MyProductsPage products={scrapedProducts}
+          pageNum={pageNum}
+          setPageNum={setPageNum}
+          itemsPerPage={itemsPerPage}
+          setItemsPerPage={setItemsPerPage}
+          sortType={sortType}
+          setSortType={setSortType}
           favorites={favorites}
           handleFavorite={handleFavorite}
           handleDeleteFavorite={handleDeleteFavorite}

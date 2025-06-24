@@ -47,3 +47,11 @@ span:nth-child(2n+1) {
     justify-content: center;
     gap: 1rem;
 }
+
+.page-btns {
+    margin: 1rem;
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    gap: 3rem;
+}

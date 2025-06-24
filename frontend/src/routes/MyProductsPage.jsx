@@ -5,9 +5,14 @@ import PriceHistory from '../components/PriceHistory.jsx'
 import FavoriteCard from '../components/FavoriteCard.jsx'
 import './MyProductsPage.css'
 
-export default function MyProductsPage({products, favorites, handleFavorite, handleDeleteFavorite, getProducts, priceHistoryProduct, setPriceHistoryProduct}) {
+export default function MyProductsPage(
+                                        {products, pageNum, setPageNum, 
+                                         itemsPerPage, setItemsPerPage, sortType, 
+                                         setSortType, favorites, handleFavorite, 
+                                         handleDeleteFavorite, getProducts, priceHistoryProduct, 
+                                         setPriceHistoryProduct}
+                                      ) {
     const [searchQuery, setSearchQuery] = useState('');
-    const [sortType, setSortType] = useState('name');
     
 
     //handles 
@@ -15,14 +20,21 @@ export default function MyProductsPage({products, favorites, handleFavorite, han
         setSearchQuery(e.target.value.toLowerCase())
     }
 
+    function updateTextInput(val) {
+        document.getElementById('range').value=val; 
+    }
+
     const handleSortChange = (e) => {
         setSortType(e.target.value);
     }
 
+    const handlePageNumChange = (e) => {
+        setPageNum(Number(e.target.value))
+    }
+
     useEffect(() => {
         getProducts()
-        // eslint-disable-next-line
-    }, [])
+    }, [sortType, pageNum, itemsPerPage])
 
     const trendOrder = {
         decrease: 0,
@@ -65,9 +77,28 @@ export default function MyProductsPage({products, favorites, handleFavorite, han
 
                         <label>Sort By Trend</label>
                         <input type="radio" name="sort" value="trend" checked={sortType == 'trend'} onChange={handleSortChange} />
+                        <label>Items Per Page</label>
+                        <select className="items-per-page" value={itemsPerPage} onChange={(e) => setItemsPerPage(Number(e.target.value))}>
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="30">30</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
                     </div>
+                    <div className='page-btns'>
+                        {pageNum > 1 && (
+                        <button className='page-button' onClick={handlePageNumChange} value={pageNum - 1}>Previous Page</button>
+                        )
+                        }
+                        <button className='page-button' onClick={handlePageNumChange} value={pageNum + 1}>Next Page</button>
+                    </div>
+
                     <div className="products-list">
-                        {
+                        {filteredProducts.length > 0 ? 
                             filteredProducts.map((product, idx) => (
                                 <ProductCard
                                     key={idx}
@@ -79,6 +110,9 @@ export default function MyProductsPage({products, favorites, handleFavorite, han
                                     
                                 />
                             ))
+                                :
+                                <h3 className="no-products">No products found</h3>
+                           
                         }
                     </div>
                 </div>
