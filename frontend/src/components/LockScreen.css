@@ -1,5 +1,5 @@
 /*Mobile*/
-@media (max-width: 781px) {
+@media (max-width: 780px) {
     .ls-background {
         position: fixed;
         height: 100%;
@@ -19,10 +19,12 @@
 
     .text {
         text-align: center;
+        padding: 1rem;
     }
     .text-input {
         text-align: center;
         border-radius: 50px;
+        width: 90vw;
     }
 
     .text-input:focus {
@@ -36,7 +38,7 @@
 }
 
 /*Desktop*/
-@media (min-width: 780px) {
+@media (min-width: 781px) {
     .ls-background {
         position: fixed;
         height: 100vh;
@@ -59,6 +61,7 @@
     .text-input {
         text-align: center;
         border-radius: 50px;
+        width: 50vw;
     }
 
     .text-input:focus {

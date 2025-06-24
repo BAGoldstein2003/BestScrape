@@ -61,12 +61,10 @@
     }
 
     .page.field {
-        display: flex;
-        justify-content: center;
         text-align: center;
+        align-items: center;
         justify-self: center;
         transition: all 0.3s ease-out;
-        width: 50%;
     }
 
     .page.review {
@@ -161,7 +159,7 @@
     }
 }
 
-/*Mobile View*/
+/*Desktop View*/
 @media (min-width: 781px) {
     .image {
         width: 5rem;

@@ -51,7 +51,6 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
 
  const variants = {
     enter: (direction) => ({
-
       x: direction > 0 ? 300 : -300,
       opacity: 0,
       position: 'relative'
