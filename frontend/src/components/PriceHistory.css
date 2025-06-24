@@ -1,43 +1,89 @@
-.screen-container {
-  padding-bottom: 90px;
-  position: fixed;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  transition: all 0.3s ease-in-out;
+/*Mobile View*/
+@media (max-width: 780px) {
+  .screen-container {
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-items: center;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .history-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 70vw;
+    background-color: yellow;
+    border-radius: 1rem;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .history-closebtn {
+    color: lightcoral;
+    transition: all 0.3s ease-out;
+  }
+
+  .history-closebtn:hover {
+    scale: 1.3;
+    cursor: pointer;
+  }
+  .title {
+    text-align: center;
+  }
 }
 
-.history-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  width: 800px;
-  background-color: yellow;
-  border-radius: 1rem;
-  gap: 5rem;
-}
 
-.history-closebtn {
-  position: absolute;
-  top: .7rem;
-  right: .7rem;
-  color: lightcoral;
-  transition: all 0.3s ease-out;
-}
+/*Desktop View*/
+@media (min-width: 781px) {
+  .screen-container {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: all 0.3s ease-in-out;
+  }
 
-.history-closebtn:hover {
-  scale: 1.3;
-  cursor: pointer;
-}
-.title {
+  .history-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 50vw;
+    background-color: yellow;
+    border-radius: 1rem;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .history-closebtn {
+    color: lightcoral;
+    transition: all 0.3s ease-out;
+  }
+
+  .history-closebtn:hover {
+    scale: 1.3;
+    cursor: pointer;
+  }
+  .title {
     text-align: center;
     margin-top: 1rem;
+  }
 }
+

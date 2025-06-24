@@ -8,7 +8,7 @@ export default function FavoritesPage({favorites, handleDeleteFavorite, priceHis
         <>
             <AnimatePresence mode='wait'>
                 {priceHistoryProduct && (
-                    <PriceHistory
+                    <PriceHistory className="price-history"
                         priceHistory={priceHistoryProduct.price_history}
                         setIsPriceHistory={() => setPriceHistoryProduct(null)}
                     />

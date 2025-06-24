@@ -79,9 +79,10 @@ export default function PriceHistory({priceHistory, setIsPriceHistory}) {
     return (
         <div className='screen-container'>
             <div className="history-container">
+                <IoCloseCircle className='history-closebtn' size = "30" onClick={handleClose}></IoCloseCircle>
                 <h1 className='title'>Price History:</h1>
                 <canvas ref={canvasRef} width="400" height="200"></canvas>
-                <IoCloseCircle className='history-closebtn' size = "30" onClick={handleClose}></IoCloseCircle>
+                
             </div>
         </div>   
     )

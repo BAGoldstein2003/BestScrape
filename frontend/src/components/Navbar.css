@@ -6,6 +6,10 @@
     word-wrap: wrap;
   }
 
+  .nav-option {
+    width: 80vw;
+  }
+
   .logo-options {
     left: 14vw;
     justify-self: center;

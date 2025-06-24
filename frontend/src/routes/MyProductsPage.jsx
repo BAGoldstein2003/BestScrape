@@ -69,25 +69,31 @@ export default function MyProductsPage(
                         </input>
                     </div>
                     <div className="sort-options">
-                        <label>Sort By Name </label>
-                        <input type="radio" name="sort" value="name" checked={sortType === 'name'} onChange={handleSortChange} />
-
-                        <label>Sort By Price</label>
-                        <input type="radio" name="sort" value="price" checked={sortType === 'price'} onChange={handleSortChange} />
-
-                        <label>Sort By Trend</label>
-                        <input type="radio" name="sort" value="trend" checked={sortType == 'trend'} onChange={handleSortChange} />
-                        <label>Items Per Page</label>
-                        <select className="items-per-page" value={itemsPerPage} onChange={(e) => setItemsPerPage(Number(e.target.value))}>
-                            <option value="5">5</option>
-                            <option value="10">10</option>
-                            <option value="15">15</option>
-                            <option value="20">20</option>
-                            <option value="25">25</option>
-                            <option value="30">30</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
+                        <div className="sort-option">
+                            <label>Sort By Name </label>
+                            <input type="radio" name="sort" value="name" checked={sortType === 'name'} onChange={handleSortChange} />
+                        </div>
+                        <div className="sort-option">
+                            <label>Sort By Price</label>
+                            <input type="radio" name="sort" value="price" checked={sortType === 'price'} onChange={handleSortChange} />
+                        </div>
+                        <div className="sort-option">
+                            <label>Sort By Trend</label>
+                            <input type="radio" name="sort" value="trend" checked={sortType == 'trend'} onChange={handleSortChange} />
+                        </div>
+                        <div className="sort-option">
+                            <label>Items Per Page</label>
+                            <select className="items-per-page" value={itemsPerPage} onChange={(e) => setItemsPerPage(Number(e.target.value))}>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="30">30</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
                     </div>
                     <div className='page-btns'>
                         {pageNum > 1 && (
@@ -111,7 +117,7 @@ export default function MyProductsPage(
                                 />
                             ))
                                 :
-                                <h3 className="no-products">No products found</h3>
+                                <h1 className="no-products">No products found</h1>
                            
                         }
                     </div>
@@ -119,7 +125,7 @@ export default function MyProductsPage(
             </div>
             <AnimatePresence mode='wait'>
                 {priceHistoryProduct && (
-                    <PriceHistory
+                    <PriceHistory className="price-history"
                         priceHistory={priceHistoryProduct.price_history}
                         setIsPriceHistory={() => setPriceHistoryProduct(null)}
                     />

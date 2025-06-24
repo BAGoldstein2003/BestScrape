@@ -55,7 +55,6 @@ function App() {
       setModalText('Error trying to fetch products. Please try restarting your connection')
       getDummyData()
     }
-    //save products in state
   }, [pageNum, itemsPerPage, sortType, setTypeModal, setModalText, setScrapedProducts])
 
 

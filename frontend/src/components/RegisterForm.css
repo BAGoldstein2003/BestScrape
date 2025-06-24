@@ -16,138 +16,291 @@
 
 @keyframes rotate { 100% { transform:rotate(-360deg); } }
 
-.image {
-    width: 5rem;
-    align-self: center;
+
+/*Mobile View*/
+@media (max-width: 780px) {
+    .image {
+        width: 5rem;
+        align-self: center;
+    }
+
+    .welcome-container {
+        text-align: center;
+        padding: 0px;
+    }
+
+    .welcome {
+        justify-content: center;
+        font-family: 'best buy';
+        flex-wrap: none;
+        text-align: center;
+        font-weight: 900;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+
+
+    .info {
+        font-family: 'best buy';
+        font-weight: lighter;
+        text-align: center;
+        margin-bottom: 3rem;
+        size: 20%;
+    }
+    .form-container {
+        padding: 3rem;
+        justify-self: center;
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+        border-radius: 1rem;
+        place-content: center;
+        justify-content: center;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    .page.field {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        justify-self: center;
+        transition: all 0.3s ease-out;
+        width: 50%;
+    }
+
+    .page.review {
+        padding: 2rem;
+        font-family: 'best buy';
+        justify-self: center;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        border-radius: 1rem;
+        text-align: center;
+        transition: all 0.3s ease-out;
+        white-space: normal;
+    }
+
+    .form-input {
+        display: flex;
+        text-align: center;
+        justify-self: center;
+        background: transparent;
+        border: .1rem solid blue;
+        border-radius: .3rem;
+        width: 100%;
+    }
+
+    .form-input:hover {
+        cursor: pointer;
+    }
+
+    .form-input:focus {
+        cursor: text;
+        outline: none;
+
+    }
+
+    .page.review > p:nth-child(2n+1) {
+        color: blue;
+    }
+
+    .page.review > p:nth-child(2n) {
+        color: grey;
+    }
+
+    .field > label:nth-child(2n+1) {
+        color: blue;
+    }
+
+    .field > label:nth-child(2n) {
+        color: grey;
+    }
+
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+        font-family: 'Best Buy'
+    }
+
+    .page-button {
+        padding: 1rem;
+        color: yellow;
+        background: blue;
+        border: .1rem solid yellow;
+        border-radius: .5rem;
+        transition: all 0.3s ease;
+    }
+
+    .page-button:active {
+        color: blue;
+        background: yellow;
+        border: .1rem solid blue;
+    }
+
+    .page-button:hover {
+        transform: scale(1.2);
+        color: blue;
+        background: yellow;
+        border: .1rem solid blue;
+    }
+
+    .name-input {
+        justify-content: center;
+    }
+
+    #yellow {
+        color: grey
+    }
+
+    #blue {
+        color: blue;
+    }
+
+    .review-header {
+        text-align: center;
+    }
 }
-.welcome {
-    justify-content: center;
-    font-family: 'best buy';
-    flex-wrap: none;
-    text-align: center;
-    font-weight: 900;
-    margin: 3rem;
-}
+
+/*Mobile View*/
+@media (min-width: 781px) {
+    .image {
+        width: 5rem;
+        align-self: center;
+    }
+
+    .welcome-container {
+        text-align: center;
+        padding: 0px;
+    }
+
+    .welcome {
+        justify-content: center;
+        font-family: 'best buy';
+        flex-wrap: none;
+        text-align: center;
+        font-weight: 900;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
 
 
 
-.info {
-    font-family: 'best buy';
-    font-weight: lighter;
-    text-align: center;
-    margin-bottom: 3rem;
-    size: 20%;
-}
-.form-container {
-    padding: 3rem;
-    justify-self: center;
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    border-radius: 1rem;
-    place-content: center;
-    justify-content: center;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-}
+    .info {
+        font-family: 'best buy';
+        font-weight: lighter;
+        text-align: center;
+        margin-bottom: 3rem;
+        size: 20%;
+    }
+    .form-container {
+        padding: 3rem;
+        justify-self: center;
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+        border-radius: 1rem;
+        place-content: center;
+        justify-content: center;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    }
 
-.page.field {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    justify-self: center;
-    transition: all 0.3s ease-out;
-    width: 50%;
-}
+    .page.field {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        justify-self: center;
+        transition: all 0.3s ease-out;
+        width: 50%;
+    }
 
-.page.review {
-    padding: 2rem;
-    font-family: 'best buy';
-    justify-self: center;
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-    border-radius: 1rem;
-    text-align: center;
-    transition: all 0.3s ease-out;
-    white-space: normal;
-}
+    .page.review {
+        padding: 2rem;
+        font-family: 'best buy';
+        justify-self: center;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        border-radius: 1rem;
+        text-align: center;
+        transition: all 0.3s ease-out;
+        white-space: normal;
+    }
 
-.form-input {
-    display: flex;
-    text-align: center;
-    justify-self: center;
-    background: transparent;
-    border: .1rem solid blue;
-    border-radius: .3rem;
-    width: 100%;
-}
+    .form-input {
+        display: flex;
+        text-align: center;
+        justify-self: center;
+        background: transparent;
+        border: .1rem solid blue;
+        border-radius: .3rem;
+        width: 100%;
+    }
 
-.form-input:hover {
-    cursor: pointer;
-}
+    .form-input:hover {
+        cursor: pointer;
+    }
 
-.form-input:focus {
-    cursor: text;
-    outline: none;
+    .form-input:focus {
+        cursor: text;
+        outline: none;
 
-}
+    }
 
-.page.review > p:nth-child(2n+1) {
-    color: blue;
-}
+    .page.review > p:nth-child(2n+1) {
+        color: blue;
+    }
 
-.page.review > p:nth-child(2n) {
-    color: grey;
-}
+    .page.review > p:nth-child(2n) {
+        color: grey;
+    }
 
-.field > label:nth-child(2n+1) {
-    color: blue;
-}
+    .field > label:nth-child(2n+1) {
+        color: blue;
+    }
 
-.field > label:nth-child(2n) {
-    color: grey;
-}
+    .field > label:nth-child(2n) {
+        color: grey;
+    }
 
+    .buttons {
+        display: flex;
+        justify-content: space-around;
+        font-family: 'Best Buy'
+    }
 
+    .page-button {
+        padding: 1rem;
+        color: yellow;
+        background: blue;
+        border: .1rem solid yellow;
+        border-radius: .5rem;
+        transition: all 0.3s ease;
+    }
 
-.buttons {
-    display: flex;
-    justify-content: space-around;
-    font-family: 'Best Buy'
-}
+    .page-button:active {
+        color: blue;
+        background: yellow;
+        border: .1rem solid blue;
+    }
 
-.page-button {
-    padding: 1rem;
-    color: yellow;
-    background: blue;
-    border: .1rem solid yellow;
-    border-radius: .5rem;
-    transition: all 0.3s ease;
-}
+    .page-button:hover {
+        transform: scale(1.2);
+        color: blue;
+        background: yellow;
+        border: .1rem solid blue;
+    }
 
-.page-button:active {
-    color: blue;
-    background: yellow;
-    border: .1rem solid blue;
-}
+    .name-input {
+        justify-content: center;
+    }
 
-.page-button:hover {
-    transform: scale(1.2);
-    color: blue;
-    background: yellow;
-    border: .1rem solid blue;
-}
+    #yellow {
+        color: grey
+    }
 
-.name-input {
-    justify-content: center;
-}
+    #blue {
+        color: blue;
+    }
 
-#yellow {
-    color: grey
-}
-
-#blue {
-    color: blue;
-}
-
-.review-header {
-    text-align: center;
+    .review-header {
+        text-align: center;
+    }
 }
