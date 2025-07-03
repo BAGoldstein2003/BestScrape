@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router'
 import { CiCircleList } from "react-icons/ci";
 import { FcSearch } from "react-icons/fc";
 import { FaHeart } from "react-icons/fa";
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTypeModal, setModalText, forgetDevice}) {
   const [isLogoActive, setIsLogoActive] = useState(false);
@@ -92,7 +93,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
           </div>
         </div>
         
-        <button className={`collapse-btn`} onClick = {() => {setIsCollapsed(prev => !prev)}}>☰</button>
+        <RxHamburgerMenu className='collapse-btn' onClick={() => {setIsCollapsed(prev => !prev)}} />
         <div className={`logo-options ${isLogoActive ? 'active' : ''}`}>
           <button className={`auth-button ${isRegistered ? 'log-out' : 'log-in'}`} onClick={changeAuthState}>{isRegistered ? 'Log Out' : 'Log In'}</button>
           <button className='forget-device' onClick={forgetDeviceAndHideOptions}>Forget This Device</button>
