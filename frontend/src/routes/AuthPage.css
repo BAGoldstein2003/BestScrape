@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: center;   /* horizontal center */
     align-items: center;
-    height: 100%;
 }
 
 .more-info {
@@ -12,4 +11,10 @@
     flex-direction: column;
     align-items: center;
 
+}
+
+@media (min-width: 681px) {
+    .register {
+        margin-top: 3rem;
+    }
 }

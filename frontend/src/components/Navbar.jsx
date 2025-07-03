@@ -8,6 +8,7 @@ import Subscribe from './Subscribe.jsx'
 
 export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTypeModal, setModalText, forgetDevice}) {
   const [isLogoActive, setIsLogoActive] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = (path) => {
@@ -29,6 +30,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
           setIsModal(true)
           setTypeModal('error')
           setModalText('You must be logged in to view your favorites!')
+          navigate('/')
           break;
         }
         else {
@@ -40,6 +42,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
           setIsModal(true);
           setTypeModal('error');
           setModalText('You must be logged in to search for products!');
+          navigate('/')
           break;
         }
         else {
@@ -51,6 +54,8 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
 
   const handleLogoClick = () => {
     setIsLogoActive(prev => !prev)
+    console.log('clicked logo')
+    console.log(isLogoActive)
   }
 
   const changeAuthState = () => {
@@ -72,20 +77,21 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
       <>
         <div className="navbar">
           <img onClick={() => handleLogoClick()} className="logo" alt="logo" src="BEST_SCRAPE-removebg-preview.png"/>
-          <div className="nav-option" onClick={() => handleClick('/my-products')}>
+          <div className="nav-option" onClick={() => handleClick('/my-products')} style={{opacity: isCollapsed ? 0 : 1, display: isCollapsed ? 'none' : 'flex'}}>
             <CiCircleList className="products-icon" size="50" fill="grey"/>
             <p className="products-link">View Products</p>
           </div>
-          <div className="nav-option" onClick={() => handleClick('/favorites')}>
+          <div className="nav-option" onClick={() => handleClick('/favorites')} style={{opacity: isCollapsed ? 0 : 1, display: isCollapsed ? 'none' : 'flex'}}>
             <FaHeart className="favorites-icon" size="50" fill="pink"/>
             <p className="favorites-link">Your Favorites</p>
           </div>
-          <div className="nav-option" onClick={() => handleClick('/search')}>
+          <div className="nav-option" onClick={() => handleClick('/search')} style={{opacity: (isCollapsed && window.innerWidth < 681) ? 0 : 1}}>
             <FcSearch className="search-icon" size="50" />
             <p className="search-link">Search For Products</p>
           </div>
         </div>
         
+        <button className={`collapse-btn`} onClick = {() => {setIsCollapsed(prev => !prev)}}>☰</button>
         <div className={`logo-options ${isLogoActive ? 'active' : ''}`}>
           <button className={`auth-button ${isRegistered ? 'log-out' : 'log-in'}`} onClick={changeAuthState}>{isRegistered ? 'Log Out' : 'Log In'}</button>
           <button className='forget-device' onClick={forgetDeviceAndHideOptions}>Forget This Device</button>

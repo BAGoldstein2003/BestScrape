@@ -1,5 +1,5 @@
 import './FavoritesPage.css'
-import {AnimatePresence} from 'framer-motion'
+import {AnimatePresence, motion} from 'framer-motion'
 import FavoriteCard from '../components/FavoriteCard.jsx'
 import PriceHistory from '../components/PriceHistory.jsx'
 
@@ -14,18 +14,21 @@ export default function FavoritesPage({favorites, handleDeleteFavorite, priceHis
                     />
                 )}
             </AnimatePresence>
-            <div>
-                <h1 className="favorites-title"><span>Your </span><span>Tracked </span> <span>Products:</span></h1>
-                {
-                    favorites.map(product => (
-                        <FavoriteCard
-                        product={product}
-                        handleDelete={handleDeleteFavorite}
-                        onShowPriceHistory={() => setPriceHistoryProduct(product)}
-                        />
-                    ))
-                }
-            </div>
+            <motion.h1 className="favorites-title"
+             initial={{ scaleX: 0, opacity: 0, x: -300 }}
+             animate={{ scaleX: 1, opacity: 1, x: 0}}
+             transition={{ duration: 0.3 }}
+             style={{originX: 0.5}}
+            ><span>Your </span><span>Tracked </span> <span>Products:</span></motion.h1>
+            {
+                favorites.map(product => (
+                    <FavoriteCard
+                    product={product}
+                    handleDelete={handleDeleteFavorite}
+                    onShowPriceHistory={() => setPriceHistoryProduct(product)}
+                    />
+                ))
+            }
         </>
     )
 }

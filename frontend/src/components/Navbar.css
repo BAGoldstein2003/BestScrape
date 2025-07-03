@@ -18,6 +18,19 @@
   .search:hover {
     transform: none;
   }
+
+  .collapse-btn {
+    position: relative;
+    bottom: 3.5rem;
+    right: -1rem;
+    transition: all 0.3s ease-out;
+    opacity: 1;
+    background: none;
+    outline: none;
+    border: 0px;
+    font-weight:900;
+    color: yellow;
+  }
 }
 
 .navbar {
@@ -159,4 +172,10 @@
   background-color: yellow;
   cursor: pointer;
   box-shadow: 0 0 20px rgba(0, 0, 0, 1);
+}
+
+@media (min-width: 681px) {
+  .collapse-btn {
+    opacity: 0;
+  }
 }

@@ -10,10 +10,11 @@ export default function FavoriteCard({product, handleDelete, onShowPriceHistory}
     return (
         <motion.div
          className={`favorite-card ${product.direction}`}
-         initial={{ scaleX: 0, scaleY: 0, opacity: 0 }}
-         animate={{ scaleX: 1, scaleY: 1, opacity: 1 }}
+         initial={{ opacity: 0 }}
          exit={{ opacity: 0 }}
-         transition={{ duration: 0.3 }}>   
+         transition={{ duration: 0.7 }}
+         whileInView={{ scaleX: 1, scaleY: 1, opacity: 1 }}
+         viewport={{once: false, amount: 0.2}}>   
             <img className='image' src={product.imgSrc} alt='product'></img>
             <p className="title">{product.title}</p>
             <PriceTrend className="price" priceHistory={product.price_history}></PriceTrend>

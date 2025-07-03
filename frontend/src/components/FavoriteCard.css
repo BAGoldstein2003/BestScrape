@@ -1,5 +1,6 @@
 .favorite-card {
     position: relative;
+    width: 344px;
     display: flex;
     flex-direction: column;
     background-color: pink;

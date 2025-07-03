@@ -32,7 +32,6 @@ html, body {
   font-family: 'best buy';
   height: 100%;
   position: relative;
-  min-height: 100vh;
 }
 
 .greeting {

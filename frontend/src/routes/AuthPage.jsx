@@ -14,13 +14,13 @@ export default function AuthPage({isRegistered, setIsRegistered, userInfo, setUs
             transition={{ duration: 0.3 }}
             className="register"
             >
-            <RegisterForm
-                setIsRegistered={setIsRegistered}
-                setUserInfo={setUserInfo}
-                setIsModal={setIsModal}
-                setTypeModal={setTypeModal}
-                setModalText={setModalText}
-            />
+                <RegisterForm
+                    setIsRegistered={setIsRegistered}
+                    setUserInfo={setUserInfo}
+                    setIsModal={setIsModal}
+                    setTypeModal={setTypeModal}
+                    setModalText={setModalText}
+                />
             </motion.div>
         ) : (
             <motion.div
@@ -32,7 +32,6 @@ export default function AuthPage({isRegistered, setIsRegistered, userInfo, setUs
             className="welcome-user"
             >
                 <h1>Welcome, {userInfo.name.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}!</h1>
-            
             </motion.div>
         )}
         </AnimatePresence>

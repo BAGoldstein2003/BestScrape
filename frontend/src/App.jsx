@@ -44,7 +44,6 @@ function App() {
         method: 'GET'
       })
       const products = await response.json()
-      console.log('products:', {scrapedProducts})
       setTimeout(() => {
         setIsModal(false)
         setScrapedProducts(products)
