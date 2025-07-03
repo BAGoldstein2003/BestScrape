@@ -181,7 +181,7 @@
   box-shadow: 0 0 20px rgba(0, 0, 0, 1);
 }
 
-@media (min-width: 681px) {
+@media (min-width: 781px) {
   .collapse-btn {
     opacity: 0;
   }
