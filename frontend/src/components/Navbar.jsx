@@ -4,7 +4,6 @@ import {useNavigate} from 'react-router'
 import { CiCircleList } from "react-icons/ci";
 import { FcSearch } from "react-icons/fc";
 import { FaHeart } from "react-icons/fa";
-import Subscribe from './Subscribe.jsx'
 
 export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTypeModal, setModalText, forgetDevice}) {
   const [isLogoActive, setIsLogoActive] = useState(false);
@@ -49,6 +48,8 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
           navigate('/search')
           break;
         }
+      default:
+        break;
     }
   }
 
@@ -85,7 +86,7 @@ export default function Navbar({setIsModal, isRegistered, setIsRegistered, setTy
             <FaHeart className="favorites-icon" size="50" fill="pink"/>
             <p className="favorites-link">Your Favorites</p>
           </div>
-          <div className="nav-option" onClick={() => handleClick('/search')} style={{opacity: (isCollapsed && window.innerWidth < 681) ? 0 : 1}}>
+          <div className="nav-option" onClick={() => handleClick('/search')} style={{opacity: isCollapsed ? 0 : 1, display: isCollapsed ? 'none' : 'flex'}}>
             <FcSearch className="search-icon" size="50" />
             <p className="search-link">Search For Products</p>
           </div>
