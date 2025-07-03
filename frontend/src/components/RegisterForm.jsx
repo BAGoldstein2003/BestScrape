@@ -172,7 +172,7 @@ const RegisterForm = ({setIsRegistered, setUserInfo, setIsModal, setTypeModal, s
           exit={{ x: -200, opacity: 0 }}
           transition={{ duration: 0.3 }}
         >
-      <h1 className='welcome'>Welcome to <span id="yellow">Best</span><span id="blue">Scrape</span>™!</h1>
+      <h1 className='welcome'>Welcome to <span id="yellow">Best</span><span id="blue">Scrape</span> ™!</h1>
       </motion.div>
       <h4 className="info">Sign-Up/Log-In to Receive Updates on Prices:</h4>
       <AnimatePresence  mode="wait" custom={slideDirection}>

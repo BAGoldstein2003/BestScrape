@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'best buy';
-    src: url('../../public/Futura Extra Bold.otf')
+    font-family: 'airstrike';
+    src: url('../../public/airstrikeexpand.ttf')
 }
 
 @keyframes bounce {
@@ -31,7 +31,7 @@
 
     .welcome {
         justify-content: center;
-        font-family: 'best buy';
+        font-family: 'airstrike';
         flex-wrap: none;
         text-align: center;
         font-weight: 900;
@@ -40,7 +40,7 @@
     }
 
     .info {
-        font-family: 'best buy';
+        font-family: 'airstrike';
         font-weight: lighter;
         text-align: center;
         margin-bottom: 3rem;
@@ -67,7 +67,7 @@
 
     .page.review {
         padding: 2rem;
-        font-family: 'best buy';
+        font-family: 'airstrike';
         justify-self: center;
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         border-radius: 1rem;
@@ -116,7 +116,7 @@
     .buttons {
         display: flex;
         justify-content: space-around;
-        font-family: 'Best Buy'
+        font-family: 'airstrike'
     }
 
     .page-button {
@@ -172,7 +172,7 @@
 
     .welcome {
         justify-content: center;
-        font-family: 'best buy';
+        font-family: 'airstrike';
         flex-wrap: none;
         text-align: center;
         font-weight: 900;
@@ -183,7 +183,7 @@
 
 
     .info {
-        font-family: 'best buy';
+        font-family: 'airstrike';
         font-weight: lighter;
         text-align: center;
         margin-bottom: 3rem;
@@ -212,7 +212,7 @@
 
     .page.review {
         padding: 2rem;
-        font-family: 'best buy';
+        font-family: 'airstrike';
         justify-self: center;
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         border-radius: 1rem;
@@ -260,10 +260,11 @@
     .buttons {
         display: flex;
         justify-content: space-around;
-        font-family: 'Best Buy'
+        font-family: 'airstrike'
     }
 
     .page-button {
+        font-family: 'airstrike';
         padding: 1rem;
         color: yellow;
         background: blue;

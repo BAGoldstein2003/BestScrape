@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'best buy';
-  src: url('../public/Futura Extra Bold.otf')
+  font-family: 'airstrike';
+  src: url('../public/airstrikeexpand.ttf')
 }
 
 @keyframes rotateGradient {
@@ -29,7 +29,7 @@ html, body {
 }
 
 .App {
-  font-family: 'best buy';
+  font-family: 'airstrike';
   height: 100%;
   position: relative;
 }
