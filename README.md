@@ -1,6 +1,6 @@
-#[BestScrape](https://bestscrape.onrender.com)
+# [BestScrape](https://bestscrape.onrender.com) (click to view)
 
-##How do I run this app?
+## How do I run this app locally?
 Follow the instructions below on how to run this project.
 
 1. First, Make sure you have node.js installed
